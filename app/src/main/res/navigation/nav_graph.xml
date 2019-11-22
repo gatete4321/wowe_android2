@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/defaultFragment">
+
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.example.wowebackand.views.FirstFragment"
+        android:label="First Fragment"
+        tools:layout="@layout/first_fragment" />
+    <fragment
+        android:id="@+id/notification"
+        android:name="com.example.wowebackand.views.recycles.DisplayNotificationView"
+        android:label="Second Fragment"
+        tools:layout="@layout/notification" />
+    <fragment
+        android:id="@+id/MyProfileFrag"
+        android:name="com.example.wowebackand.views.MyProfile"
+        android:label="Third Fragment"
+        tools:layout="@layout/my_profile" />
+    <fragment
+        android:id="@+id/defaultFragment"
+        android:name="com.example.wowebackand.views.DefaultFragment"
+        android:label="Default Fragment"
+        tools:layout="@layout/default_fragment" />
+    <fragment
+        android:id="@+id/serviceProvider"
+        android:name="com.example.wowebackand.views.recycles.DisplayServiceProvider"
+        android:label="techinicians"
+        tools:layout="@layout/layout_frag_service_provider">
+    </fragment>
+    <fragment
+        android:id="@+id/techDetail"
+        android:name="com.example.wowebackand.views.TechProfile"
+        tools:layout="@layout/layout_tech_profile_item"
+        android:label="tech"/>
+    <fragment
+        android:id="@+id/completedForm"
+        android:name="com.example.wowebackand.views.Completed_full_appoitement"
+        tools:layout="@layout/display_completed_appoitement_view"
+        android:label="completed"/>
+    <fragment
+        android:id="@+id/makeAppoitement"
+        android:name="com.example.wowebackand.views.MakeAppoitement"
+        android:label="Book Appoitement"
+        tools:layout="@layout/layout_make_appoitement"/>
+    <fragment
+        android:id="@+id/updateAppoitement"
+        android:name="com.example.wowebackand.views.pending_full_appoitement"
+        android:label=" edit Appoitement"
+        tools:layout="@layout/layout_edit_appoitement"/>
+
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.wowebackand.views.AboutUs"
+        tools:layout="@layout/fragment_about_us"
+        android:label="about us"/>
+
+</navigation>

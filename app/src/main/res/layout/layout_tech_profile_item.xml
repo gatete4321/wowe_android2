@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+ <LinearLayout
+     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
+     xmlns:tools="http://schemas.android.com/tools"
+     android:id="@+id/linear_layout_profile_item"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="@color/design_default_color_primary"
+    >
+
+    <ImageView
+        android:id="@+id/tech_image"
+        android:layout_width="150dp"
+        android:layout_height="125dp"
+        android:src="@drawable/ic_edit"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
+     <TextView
+         android:id="@+id/profile_item_tech_name"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="eng tuyishime justin"
+         android:gravity="center"
+         android:textStyle="bold"
+         android:textSize="25dp"
+         />
+     <TextView
+         android:id="@+id/profile_item_tech_carier_name"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="general Physician"
+         android:textStyle="italic"
+         android:textColor="#c3c3c3"
+         android:textSize="20dp"
+         android:gravity="center"
+         android:layout_marginTop="10dp"
+         />
+
+     <RatingBar
+         android:id="@+id/tech_detail_ratingBar"
+         android:layout_width="223dp"
+         android:layout_height="wrap_content"
+         android:layout_gravity="center"
+         android:scrollbarSize="10dp"
+         android:layout_marginTop="10dp"/>
+     <RelativeLayout
+         android:layout_width="match_parent"
+         android:layout_height="150dp"
+         android:background="#c3c3c3"/>
+     <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="about technician"
+         android:gravity="center"
+         android:textStyle="bold"
+         android:textColor="#000000"
+         android:textSize="20dp"/>
+     <TextView
+         android:id="@+id/profile_item_tech_about"
+         android:layout_width="match_parent"
+         android:layout_height="100dp"
+         android:textSize="20dp"
+         android:textStyle="normal"
+         android:textColor="#c3c3c3"
+         android:padding="16dp"
+         android:hint="yize muri iprc jjfjf gdhd kkjfjhfjhdjhdjhdjjdjdfdfhdjfn"
+         />
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:background="@color/colorAccent"/>
+     <TextView
+         android:id="@+id/profile_item_tech_location"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:textStyle="italic"
+         android:textColor="#c3c3f9"
+         android:textSize="18dp"
+         android:layout_marginTop="4dp"
+         android:layout_marginBottom="4dp"
+         android:paddingLeft="16dp"
+         android:text="2nd Floor,makuza,kigali town"/>
+
+     <View
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:background="@color/colorAccent"/>
+     <Button
+         android:id="@+id/button_make_appoitement"
+         android:layout_width="match_parent"
+         android:layout_height="70dp"
+         android:text="BOOK AN APPOINTMENT"
+         android:textStyle="bold"
+         android:textSize="25dp"
+         android:layout_marginTop="20dp"
+         android:layout_marginLeft="16dp"
+         android:layout_marginRight="16dp"
+         android:gravity="center"
+         android:textColor="#FFFFFF"
+         android:background="@color/colorPrimary"/>
+         />
+ </LinearLayout>
+</ScrollView>

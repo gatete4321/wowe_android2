@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="4dp"
+
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|right"
+            android:layout_marginLeft="80dp"
+            android:textSize="20dp"
+            android:textStyle="italic"
+            android:gravity="center|left"
+            android:hint="Rwanda:Kigali:IPRC-KIGALI"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|left"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_location" />
+
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="4dp"
+
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|right"
+            android:layout_marginLeft="80dp"
+            android:textSize="20dp"
+            android:gravity="center|left"
+            android:hint="wowe1234@gmail.com"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|left"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_email_account" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="4dp"
+
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|right"
+            android:layout_marginLeft="80dp"
+            android:textSize="20dp"
+            android:gravity="center|left"
+            android:hint="0785336934"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|left"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_phone_account" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="4dp"
+
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|right"
+            android:layout_marginLeft="80dp"
+            android:textSize="20dp"
+            android:gravity="center|left"
+            android:hint="Version 1.0"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|left"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_adb" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="about us"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/aboutUs"
+        android:textSize="20dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:textStyle="bold"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="feed back"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        android:textColor="@color/black"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="4dp"
+
+        >
+
+        <EditText
+            android:id="@+id/about_feedback"
+            android:layout_width="match_parent"
+            android:hint="icyo watumenyesha"
+            android:layout_marginRight="16dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|right"
+            android:layout_marginLeft="80dp"
+            android:textSize="20dp"
+            android:gravity="center|left"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/about_submit_feedback"
+            android:layout_width="47dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center|left"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_send_about" />
+
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

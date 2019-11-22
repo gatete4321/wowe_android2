@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">WoweBackAnd</string>
+    <array name="imyuga">
+        <item>gusudira</item>
+        <item>kubaka</item>
+        <item>electronicie</item>
+        <item>amashanyarazi</item>
+        <item>amazi</item>
+        <item>gukanika</item>
+        <item>gutwara</item>
+        <item>kubaza</item>
+    </array>
+    <string name="aboutUs">wowe ni application ifasha abantu bize imyuga kuba bajya ku isoko ry\' umurimo
+    biciye mu kubamenyakanisha mu buryo bwi koranabuhanga rya application yo muri telephone za android.yakozwe na banyeshuri bo muri
+        kaminuza ya IPRC-KIGALI</string>
+</resources>

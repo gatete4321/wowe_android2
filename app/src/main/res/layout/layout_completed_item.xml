@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_margin="4dp"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <ImageView
+            android:id="@+id/completed_item_image"
+            android:layout_width="18dp"
+            android:layout_height="50dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/completed_item_text_view_service_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="kogosha"/>
+
+            <TextView
+                android:id="@+id/completed_item_display_tech_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="rukara 1"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/completed_item_date_display"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="21/2/2018"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="2"
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="3dp"
+            android:src="@drawable/ic_done"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+<!--<RelativeLayout-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="54dp"-->
+<!--android:layout_margin="4dp">-->
+
+<!--<TextView-->
+<!--    android:id="@+id/completed_item_text_view_service_name"-->
+<!--    android:layout_width="145dp"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_alignLeft="@id/completed_item_image"-->
+<!--    android:layout_marginLeft="52dp"-->
+<!--    android:hint="servicename"-->
+<!--    android:textColor="@android:color/black"-->
+<!--    android:textSize="20sp"-->
+<!--    android:textStyle="bold" />-->
+
+<!--<TextView-->
+<!--    android:id="@+id/completed_item_display_tech_name"-->
+<!--    android:layout_width="125dp"-->
+<!--    android:layout_height="18dp"-->
+<!--    android:layout_below="@+id/completed_item_text_view_service_name"-->
+<!--    android:layout_alignParentEnd="true"-->
+<!--    android:layout_alignParentBottom="true"-->
+<!--    android:layout_marginTop="8dp"-->
+<!--    android:layout_marginEnd="191dp"-->
+<!--    android:layout_marginBottom="1dp"-->
+<!--    android:text="TextView" />-->
+
+<!--<ImageView-->
+<!--    android:id="@+id/completed_item_image"-->
+<!--    android:layout_width="50dp"-->
+<!--    android:layout_height="50dp"-->
+<!--    android:padding="2dp" />-->
+
+<!--<TextView-->
+<!--    android:id="@+id/completed_item_date_display"-->
+<!--    android:layout_width="151dp"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:layout_alignLeft="@id/completed_item_text_view_service_name"-->
+<!--    android:layout_marginLeft="147dp"-->
+<!--    android:gravity="center"-->
+<!--    android:hint="date" />-->
+
+<!--<ImageView-->
+<!--    android:layout_width="50dp"-->
+<!--    android:layout_height="50dp"-->
+<!--    android:layout_alignParentEnd="true"-->
+<!--    android:layout_marginEnd="3dp"-->
+<!--    android:src="@drawable/ic_done" />-->
+
+
+<!--</RelativeLayout>-->
