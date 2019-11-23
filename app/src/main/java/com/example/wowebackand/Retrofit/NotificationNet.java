@@ -3,6 +3,7 @@ package com.example.wowebackand.Retrofit;
 
 
 import com.example.wowebackand.models.Notification;
+import com.example.wowebackand.models.NotificationForm;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface NotificationNet
     public Call<List<Notification>> getNotifications(Notification filter);
 
     @POST("/public/notification/create")
-    public Call<Integer> createNotification(Notification notification);
+    public Call<Integer> createNotification(NotificationForm notificationForm);
 
     @POST("/public/notification/delete")
     public Call<Integer> deleteNotification(Notification filter);

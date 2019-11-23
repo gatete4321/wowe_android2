@@ -14,12 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wowebackand.R;
 import com.example.wowebackand.models.Notification;
+import com.example.wowebackand.models.NotificationForm;
 import com.example.wowebackand.models.constant.Const;
+import com.example.wowebackand.respostory.NotificationRespostory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    NotificationRespostory respostory;
 
     Context context;
     List<Notification> notifications;
@@ -43,24 +47,52 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
         if (getItemViewType(position) == TYPE_ACT) {
-            ((NotAction1) holder).setAction1(notifications.get(position));
-            ((NotAction1) holder).accept.setOnClickListener((view) -> {
-                /**
-                 * on accepted
-                 */
-                Toast.makeText(context, "accepted", Toast.LENGTH_SHORT).show();
-            });
+            Notification notification = notifications.get(position);
+            ((NotAction1) holder).setAction1(notification);
+            /**
+             * 55 not allowed to make another notification
+             */
+            if (notification.getStatus() !=55) {
+                ((NotAction1) holder).accept.setOnClickListener((view) -> {
+                    /**
+                     * on accepted
+                     */
+                    createNotificaion(2, (NotificationForm) notification);
+                    Toast.makeText(context, "accepted", Toast.LENGTH_SHORT).show();
+                });
 
 
-            ((NotAction1) holder).cancel.setOnClickListener(view -> {
-                /**
-                 * on canceled
-                 */
-                Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show();
-            });
+                ((NotAction1) holder).cancel.setOnClickListener(view -> {
+                    /**
+                     * on canceled
+                     */
+                    createNotificaion(3, (NotificationForm) notification);
+                    Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show();
+                });
+            }
         } else {
-            ((NotActionOthers)holder).setOthers(notifications.get(position));
+            ((NotActionOthers) holder).setOthers(notifications.get(position));
         }
+
+
+    }
+
+    /**
+     * this will hold the actionId that we want
+     * @param actionId the action
+     * @  the recent notification in order to be updated to 55
+     * @param notification2 the appoitement id
+     */
+    private void createNotificaion(int actionId, NotificationForm notification2) {
+        respostory=new NotificationRespostory(null);
+        NotificationForm notification=new NotificationForm();
+        notification.setActionId(actionId);
+        notification.setRecentNotificationId(notification2.getRecentNotificationId());
+        notification.setAppoitementId(notification2.getAppoitementId());
+        notification.setUwayikozeId(notification2.getUyikoreweId());
+        notification.setUyikoreweId(notification2.getUwayikozeId());
+        respostory.insertNotification(notification);
+
 
 
     }
@@ -86,18 +118,20 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
     }
-    public void testData(){
-      Notification notification;
-        notifications=new ArrayList<>();
-        for (int a=0;a<=10;a++){
-            notification=new Notification();
-            notification.setActionId(a>5?a-5:a);
+
+    public void testData() {
+        Notification notification;
+        notifications = new ArrayList<>();
+        for (int a = 0; a <= 10; a++) {
+            notification = new Notification();
+            notification.setActionId(a > 5 ? a - 5 : a);
             notification.setAppoitementId(a);
             notification.setUwayikozeId(a);
-            notification.setUyikoreweId(a+10);
+            notification.setUyikoreweId(a + 10);
             notifications.add(notification);
         }
     }
+
 }
 
 

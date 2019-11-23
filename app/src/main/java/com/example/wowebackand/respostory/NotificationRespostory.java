@@ -6,6 +6,7 @@ import com.example.wowebackand.Retrofit.DoNet;
 import com.example.wowebackand.Retrofit.NotificationNet;
 import com.example.wowebackand.Retrofit.RetrofitService;
 import com.example.wowebackand.models.Notification;
+import com.example.wowebackand.models.NotificationForm;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class NotificationRespostory
         return doNet.getLiveData();
     }
 
-    public Integer insertNotification(Notification notification){
+    public Integer insertNotification(NotificationForm notification){
         Call<Integer> call=net.createNotification(notification);
         DoNet<Integer> doNet=new DoNet<Integer>();
         call.enqueue(doNet);
