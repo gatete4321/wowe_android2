@@ -102,6 +102,7 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
             appoitement.setServiceId(i);
             appoitement.setDoneTime(new Date());
             appoitements.add(appoitement);
+            appoitement.setCreateTime(new Date());
         }
     }
 }

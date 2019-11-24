@@ -27,10 +27,10 @@ public class Appoitement implements Parcelable
 
 
     private Integer serviceId;
-    private Integer callNumber;
+    private String techName;
 
-    public Appoitement(Integer appoitementId,Integer clientId, Integer techId, Date createTime, Date doneTime, String feedBack, Integer status, Integer rate, String plaque, String description, Integer serviceId, Integer callNumber) {
-        this.appoitementId=appoitementId;
+    public Appoitement(Integer appoitementId, Integer clientId, Integer techId, Date createTime, Date doneTime, String feedBack, Integer status, Integer rate, String plaque, String description, Integer serviceId, String techName) {
+        this.appoitementId = appoitementId;
         this.clientId = clientId;
         this.techId = techId;
         this.createTime = createTime;
@@ -41,21 +41,21 @@ public class Appoitement implements Parcelable
         this.plaque = plaque;
         this.description = description;
         this.serviceId = serviceId;
-        this.callNumber = callNumber;
+        this.techName = techName;
     }
 
     @Ignore
     public Appoitement() {
     }
-@Ignore
+
+
+    @Ignore
     protected Appoitement(Parcel in) {
-
-    if (in.readByte() == 0) {
-        appoitementId= null;
-    } else {
-        appoitementId = in.readInt();
-    }
-
+        if (in.readByte() == 0) {
+            appoitementId = null;
+        } else {
+            appoitementId = in.readInt();
+        }
         if (in.readByte() == 0) {
             clientId = null;
         } else {
@@ -84,11 +84,7 @@ public class Appoitement implements Parcelable
         } else {
             serviceId = in.readInt();
         }
-        if (in.readByte() == 0) {
-            callNumber = null;
-        } else {
-            callNumber = in.readInt();
-        }
+        techName = in.readString();
     }
 
     @Ignore
@@ -192,59 +188,63 @@ public class Appoitement implements Parcelable
         this.serviceId = serviceId;
     }
 
-    public Integer getCallNumber() {
-        return callNumber;
+    public String getTechName() {
+        return techName;
     }
 
-    public void setCallNumber(Integer callNumber) {
-        this.callNumber = callNumber;
+    public void setTechName(String techName) {
+        this.techName = techName;
     }
 
+
+    @Ignore
     @Override
     public int describeContents() {
         return 0;
     }
 
+    @Ignore
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        if (clientId == null) {
-            dest.writeByte((byte) 0);
+    public void writeToParcel(Parcel parcel, int i) {
+        if (appoitementId == null) {
+            parcel.writeByte((byte) 0);
         } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(clientId);
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(appoitementId);
+        }
+        if (clientId == null) {
+            parcel.writeByte((byte) 0);
+        } else {
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(clientId);
         }
         if (techId == null) {
-            dest.writeByte((byte) 0);
+            parcel.writeByte((byte) 0);
         } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(techId);
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(techId);
         }
-        dest.writeString(feedBack);
+        parcel.writeString(feedBack);
         if (status == null) {
-            dest.writeByte((byte) 0);
+            parcel.writeByte((byte) 0);
         } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(status);
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(status);
         }
         if (rate == null) {
-            dest.writeByte((byte) 0);
+            parcel.writeByte((byte) 0);
         } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(rate);
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(rate);
         }
-        dest.writeString(plaque);
-        dest.writeString(description);
+        parcel.writeString(plaque);
+        parcel.writeString(description);
         if (serviceId == null) {
-            dest.writeByte((byte) 0);
+            parcel.writeByte((byte) 0);
         } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(serviceId);
+            parcel.writeByte((byte) 1);
+            parcel.writeInt(serviceId);
         }
-        if (callNumber == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(callNumber);
-        }
+        parcel.writeString(techName);
     }
 }

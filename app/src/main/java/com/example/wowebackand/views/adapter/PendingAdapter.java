@@ -76,7 +76,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyviewHo
 
     @Override
     public int getItemCount() {
-//        if (appoitements==null)
+        if (appoitements==null)
             initializeAppoitements();
         return appoitements.size();
     }

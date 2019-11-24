@@ -9,15 +9,22 @@ import android.view.ViewGroup;
 
 
 import com.example.wowebackand.R;
+import com.example.wowebackand.models.Notification;
+import com.example.wowebackand.viewModel.NotificationViewModel;
 import com.example.wowebackand.views.adapter.DisplayNotificationAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class DisplayNotificationView extends Fragment {
+
+    NotificationViewModel viewModel;
 
     RecyclerView recyclerView;
 
@@ -33,11 +40,16 @@ public class DisplayNotificationView extends Fragment {
 
         View view=inflater.inflate(R.layout.notification, container, false);
         recyclerView=view.findViewById(R.id.notification_recycle);
+        viewModel= ViewModelProviders.of(this).get(NotificationViewModel.class);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
 
         adapter=new DisplayNotificationAdapter();
+
+        viewModel.getNotificationLiveData().observe(this,(notifications1)->{
+            adapter.setNotifications(notifications1);
+        });
 
         recyclerView.setAdapter(adapter);
         return view;

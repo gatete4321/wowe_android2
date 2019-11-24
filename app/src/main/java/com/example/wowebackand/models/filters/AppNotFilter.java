@@ -1,6 +1,9 @@
 package com.example.wowebackand.models.filters;
 
-public class AppoitementFilter
+/**
+ * this is the filter for appoitement and notification
+ */
+public class AppNotFilter
 {
     private Integer id;
 

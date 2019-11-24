@@ -19,6 +19,7 @@ import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.respostory.NotificationRespostory;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -52,7 +53,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
             /**
              * 55 not allowed to make another notification
              */
-            if (notification.getStatus() !=55) {
+//            if (notification.getStatus() !=55) {
                 ((NotAction1) holder).accept.setOnClickListener((view) -> {
                     /**
                      * on accepted
@@ -69,7 +70,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
                     createNotificaion(3, (NotificationForm) notification);
                     Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show();
                 });
-            }
+//            }
         } else {
             ((NotActionOthers) holder).setOthers(notifications.get(position));
         }
@@ -128,6 +129,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
             notification.setAppoitementId(a);
             notification.setUwayikozeId(a);
             notification.setUyikoreweId(a + 10);
+            notification.setDoneTime(new Date());
             notifications.add(notification);
         }
     }
@@ -140,7 +142,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
  */
 
 class NotAction1 extends RecyclerView.ViewHolder {
-    TextView cancel, accept, clientName, appDescr;
+    TextView cancel, accept, clientName, appDescr,date;
     ImageView serviceImage;
     View view;
 
@@ -151,6 +153,7 @@ class NotAction1 extends RecyclerView.ViewHolder {
         clientName = itemView.findViewById(R.id.item_client_name_notification_action1);
         appDescr = itemView.findViewById(R.id.notification_app_description);
         serviceImage = itemView.findViewById(R.id.image_view_notification_action1);
+        date=itemView.findViewById(R.id.item_date_notification_action1);
         view = itemView;
     }
 
@@ -158,11 +161,12 @@ class NotAction1 extends RecyclerView.ViewHolder {
         clientName.setText(notification.getUwayikozeId() + "mwenyewe");
         appDescr.setText(notification.getAppoitementId() + "kogosha inyamirambo");
         serviceImage.setImageResource(Const.serviceIdImag(notification.getActionId()));
+        date.append(notification.getDoneTime().getDate()+"/"+notification.getDoneTime().getMonth()+"/"+notification.getDoneTime().getYear());
     }
 }
 
 class NotActionOthers extends RecyclerView.ViewHolder {
-    TextView techName, serviceName, umwanzuro;
+    TextView techName, serviceName, umwanzuro,date;
     ImageView techImage;
     View view;
 
@@ -172,6 +176,7 @@ class NotActionOthers extends RecyclerView.ViewHolder {
         serviceName = itemView.findViewById(R.id.notification_actions_service_name);
         umwanzuro = itemView.findViewById(R.id.notification_actions_message);
         techImage = itemView.findViewById(R.id.notification_tech_image);
+        date=itemView.findViewById(R.id.notification_actions_date);
         view = itemView;
     }
 
@@ -180,7 +185,7 @@ class NotActionOthers extends RecyclerView.ViewHolder {
         serviceName.setText("gufura");
         umwanzuro.setText(Const.namesAction(notification.getActionId()));
         techImage.setImageResource(Const.serviceIdImag(notification.getActionId()));
-
+        date.append(notification.getDoneTime().getDate()+"/"+notification.getDoneTime().getMonth()+"/"+notification.getDoneTime().getYear());
     }
 
 }

@@ -1,7 +1,7 @@
 package com.example.wowebackand.Retrofit;
 
 import com.example.wowebackand.models.Appoitement;
-import com.example.wowebackand.models.filters.AppoitementFilter;
+import com.example.wowebackand.models.filters.AppNotFilter;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import retrofit2.http.POST;
 public interface AppoitementNet
 {
     @POST("public/app/appoitement")
-    Call<Appoitement> getAppoitement(@Body AppoitementFilter filter);
+    Call<Appoitement> getAppoitement(@Body AppNotFilter filter);
 
     @POST("/public/app/all")
-    Call<List<Appoitement>> getAllAppoitements(@Body AppoitementFilter filter);
+    Call<List<Appoitement>> getAllAppoitements(@Body AppNotFilter filter);
 
 //    Call<List<Appoitement>> getCompletedAppoitements(Integer clientId);
 //
@@ -25,10 +25,10 @@ public interface AppoitementNet
     Call<String> createAppoitement(@Body Appoitement appoitement);
 
     @POST("public/app/delete")
-    Call<String> deleteAppoitement(@Body AppoitementFilter filter);
+    Call<String> deleteAppoitement(@Body AppNotFilter filter);
 
 
-    Call<String> rateAppoitement(@Body AppoitementFilter filter);
+    Call<String> rateAppoitement(@Body AppNotFilter filter);
 
     Call<String> feedBack(@Body String feedBack);
 

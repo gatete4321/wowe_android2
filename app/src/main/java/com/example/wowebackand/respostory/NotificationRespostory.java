@@ -7,6 +7,7 @@ import com.example.wowebackand.Retrofit.NotificationNet;
 import com.example.wowebackand.Retrofit.RetrofitService;
 import com.example.wowebackand.models.Notification;
 import com.example.wowebackand.models.NotificationForm;
+import com.example.wowebackand.models.filters.AppNotFilter;
 
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class NotificationRespostory
         this.application = application;
     }
 
-    public MutableLiveData<List<Notification>> getNotifications(Notification notification){
-        Call<List<Notification>> call=net.getNotifications(notification);
+    public MutableLiveData<List<Notification>> getNotifications(AppNotFilter filter){
+        Call<List<Notification>> call=net.getNotifications(filter);
         DoNet<List<Notification>> doNet=new DoNet();
         call.enqueue(doNet);
         return doNet.getLiveData();

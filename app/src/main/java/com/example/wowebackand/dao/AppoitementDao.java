@@ -21,9 +21,11 @@ public interface AppoitementDao
     void updateAppoitement(Appoitement appoitement);//not finished
     @Delete
     void deleteAppoitement(Appoitement appoitement);//not finished
-    @Query("SELECT * FROM Appoitement WHERE Appoitement.status= :status1 ")
-    LiveData<List<Appoitement>> getAll(int status1);
+    @Query("SELECT * FROM Appoitement WHERE Appoitement.status= :status1 AND Appoitement.clientId=:clientId1")
+    LiveData<List<Appoitement>> getAll(int status1,int clientId1);
 
     @Query("SELECT appoitementId FROM Appoitement ORDER BY appoitementId DESC LIMIT 1")
     Integer getLastAppoitementId();
+    @Query(" select last_insert_rowid()  from Appoitement last_insert_rowid ")
+    Integer getLastAppoitement();
 }

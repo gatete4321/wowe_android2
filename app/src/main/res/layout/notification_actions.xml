@@ -33,14 +33,14 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:orientation="vertical"
-            android:weightSum="2">
+            android:weightSum="3">
 
             <TextView
                 android:id="@+id/notification_actions_tech_name"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="center|left"
                 android:textSize="20dp"
                 android:text="gashumba liliane" />
 
@@ -50,8 +50,14 @@
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:textSize="20dp"
-                android:gravity="center"
+                android:gravity="center|left"
                 android:text="guteka" />
+            <TextView
+                android:id="@+id/notification_actions_date"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="20dp"
+                android:text="DATE:"/>
 
         </LinearLayout>
 

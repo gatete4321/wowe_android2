@@ -40,7 +40,7 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:text="feedBack"
+        android:hint="feedBack"
         app:layout_constraintBottom_toTopOf="@+id/app_view_button_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="37dp"
         app:layout_constraintBottom_toTopOf="@+id/app_view_description"
-        app:layout_constraintEnd_toStartOf="@+id/app_view_date"
+        app:layout_constraintEnd_toStartOf="@+id/app_view_create_date"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_android_black_24dp" />
@@ -71,12 +71,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
-        android:id="@+id/app_view_date"
+        android:id="@+id/app_view_create_date"
         android:layout_width="191dp"
         android:layout_height="55dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="11dp"
-        android:text="17/10/2019"
+        android:text="created:"
         android:gravity="center|left"
         app:layout_constraintBottom_toTopOf="@+id/app_view_tech_name"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,11 +90,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="370dp"
-        android:text="TextView"
+        android:text="description:nu gukora amatara"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/app_view_contact" />
+        app:layout_constraintTop_toBottomOf="@+id/app_view_done_time" />
 
     <TextView
         android:id="@+id/app_view_tech_name"
@@ -104,31 +104,31 @@
         android:layout_marginEnd="6dp"
         android:layout_marginBottom="16dp"
         android:gravity="center|left"
-        android:text="TextView"
+        android:text="name:gatete"
         app:layout_constraintBottom_toTopOf="@+id/app_view_service_name"
-        app:layout_constraintEnd_toEndOf="@+id/app_view_contact"
+        app:layout_constraintEnd_toEndOf="@+id/app_view_done_time"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/app_view_date"
-        app:layout_constraintTop_toBottomOf="@+id/app_view_date" />
+        app:layout_constraintStart_toStartOf="@+id/app_view_create_date"
+        app:layout_constraintTop_toBottomOf="@+id/app_view_create_date" />
 
     <TextView
         android:id="@+id/app_view_service_name"
         android:layout_width="209dp"
         android:layout_height="48dp"
         android:layout_marginBottom="5dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/app_view_contact"
-        app:layout_constraintEnd_toEndOf="@+id/app_view_contact"
+        android:text="service:"
+        app:layout_constraintBottom_toTopOf="@+id/app_view_done_time"
+        app:layout_constraintEnd_toEndOf="@+id/app_view_done_time"
         app:layout_constraintStart_toStartOf="@+id/app_view_tech_name"
         app:layout_constraintTop_toBottomOf="@+id/app_view_tech_name" />
 
     <TextView
-        android:id="@+id/app_view_contact"
+        android:id="@+id/app_view_done_time"
         android:layout_width="204dp"
         android:layout_height="52dp"
         android:layout_marginEnd="21dp"
         android:layout_marginBottom="11dp"
-        android:text="TextView"
+        android:hint="done:"
         app:layout_constraintBottom_toTopOf="@+id/app_view_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_view_service_name" />

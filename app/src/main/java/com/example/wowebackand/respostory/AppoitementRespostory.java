@@ -11,7 +11,7 @@ import com.example.wowebackand.Retrofit.RetrofitService;
 import com.example.wowebackand.dao.AppoitementDao;
 import com.example.wowebackand.dao.WoweDatabase;
 import com.example.wowebackand.models.Appoitement;
-import com.example.wowebackand.models.filters.AppoitementFilter;
+import com.example.wowebackand.models.filters.AppNotFilter;
 
 import java.util.List;
 
@@ -60,7 +60,7 @@ public class AppoitementRespostory {
      * @param filter
      * @return
      */
-    public Appoitement getAppoitement(AppoitementFilter filter) {
+    public Appoitement getAppoitement(AppNotFilter filter) {
         Call<Appoitement> appoitementCall=appoitementNet.getAppoitement(filter);
         DoNet net=new DoNet<Appoitement>();
         appoitementCall.enqueue(net);
@@ -72,7 +72,7 @@ public class AppoitementRespostory {
      *ndakoresha DoNet<Object.class>().class mu gukora operation zose za network
      * @return
      */
-    public LiveData<List<Appoitement>> getAppoitements(AppoitementFilter filter) {
+    public LiveData<List<Appoitement>> getAppoitements(AppNotFilter filter) {
 
         if (filter.getStatus()==1){
             filter.setStatus(null);
@@ -85,7 +85,7 @@ public class AppoitementRespostory {
              */
         }
 
-        allAppoitements=dao.getAll(filter.getStatus());
+        allAppoitements=dao.getAll(filter.getStatus(),filter.getClientId());
 
         return allAppoitements;
     }
@@ -94,7 +94,7 @@ public class AppoitementRespostory {
      * iyi icyo idufasha nu ku insertinga all appoitement muri data base
      * @param filter
      */
-    public static void insertDataInDatabase(AppoitementFilter filter, AppoitementDao dao, AppoitementNet appoitementNet){
+    public static void insertDataInDatabase(AppNotFilter filter, AppoitementDao dao, AppoitementNet appoitementNet){
         i++;
         if (i<=1){
         Call<List<Appoitement>> listCall = appoitementNet.getAllAppoitements(filter);
