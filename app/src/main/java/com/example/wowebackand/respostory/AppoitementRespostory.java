@@ -11,6 +11,7 @@ import com.example.wowebackand.Retrofit.RetrofitService;
 import com.example.wowebackand.dao.AppoitementDao;
 import com.example.wowebackand.dao.WoweDatabase;
 import com.example.wowebackand.models.Appoitement;
+import com.example.wowebackand.models.AppoitementForm;
 import com.example.wowebackand.models.filters.AppNotFilter;
 
 import java.util.List;
@@ -35,16 +36,18 @@ public class AppoitementRespostory {
     }
 
     /**
+     * nago nanjiza muri database kuko nyeneye primary key yo kuri server
      * create an appoitement
      * @param appoitement
      * @return
      */
-    public String insertAppoitement(Appoitement appoitement) {
-
-        Call<String> call=appoitementNet.createAppoitement(appoitement);
-        DoNet<String> net=new DoNet<>();
+    public Integer insertAppoitement(AppoitementForm appoitement) {
+        Integer result;
+        Call<Integer> call=appoitementNet.createAppoitement(appoitement);
+        DoNet<Integer> net=new DoNet<>();
         call.enqueue(net);
-        return net.getLiveData().getValue();
+        result=net.getLiveData().getValue();
+        return result;
     }
 
     /**

@@ -24,8 +24,8 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyviewHo
 
     private MyOnRecyclerListener listener;
 
-    public PendingAdapter(MyOnRecyclerListener listener) {
-        this.listener = listener;
+    public PendingAdapter() {
+
     }
 
     @NonNull
@@ -45,18 +45,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyviewHo
         holder.techName.setText("rugamba"+appoitement.getClientId());
         holder.dateDisplay.setText(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
         //        holder.imageView.draw(R.drawable.ic_edi);
-        holder.techName.setOnClickListener((view)->{
-            /**
-             * hano turahita tujya kuri profile yu mu techinicie
-             */
-            holder.techName.setText("gatete");
-        });
-        holder.dateDisplay.setOnClickListener((view)->{
-            /**
-             * hano tura pasingamo datepicker dialog
-             */
-            listener.onRecyclerViewItemCliked(holder.dateDisplay,null);
-        });
+
 
         holder.view2.setOnClickListener((view)->{
             /**
@@ -110,7 +99,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyviewHo
     public void initializeAppoitements(){
         appoitements=new ArrayList<>();
         Appoitement appoitement ;
-        for (int i=0;i<=12;i++){
+        for (int i=0;i<=2;i++){
             appoitement=new Appoitement();
             appoitement.setTechId(R.drawable.abasuderezi);
             appoitement.setClientId(i);

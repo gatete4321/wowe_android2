@@ -27,8 +27,7 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
 
     private MyOnRecyclerListener listener;
 
-    public CompletedAdapter(MyOnRecyclerListener listener) {
-        this.listener = listener;
+    public CompletedAdapter() {
     }
 
     @NonNull
@@ -44,7 +43,7 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
         Appoitement appoitement=appoitements.get(position);
         holder.serviceName.setText("wowe"+appoitement.getServiceId());
         holder.techName.setText("rukara"+appoitement.getClientId());
-        holder.date.setText(appoitement.getDoneTime().toString());
+        holder.date.setText(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
         holder.imageView.setImageResource(R.drawable.abasuderezi);
         holder.view.setOnClickListener((view)->{
 
@@ -95,7 +94,7 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
     public void initializeAppoitements(){
         appoitements=new ArrayList<>();
         Appoitement appoitement ;
-        for (int i=0;i<=12;i++){
+        for (int i=0;i<=2;i++){
             appoitement=new Appoitement();
             appoitement.setTechId(i);
             appoitement.setClientId(i);

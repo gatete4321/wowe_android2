@@ -56,7 +56,7 @@ public class ProvidersAdapter extends RecyclerView.Adapter<ProvidersAdapter.MyPr
             Bundle bundle = new Bundle();
             bundle.putParcelable("client", client);
 
-            holder.techDescription.setText(client.getClientLocation());
+            holder.techDescription.setText(client.getClientAbout());
             holder.techName.setText(client.getUsername());
             initializeImages(client.getProfileImage(),holder.techImage);//loading image
 

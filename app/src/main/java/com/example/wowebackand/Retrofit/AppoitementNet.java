@@ -1,6 +1,7 @@
 package com.example.wowebackand.Retrofit;
 
 import com.example.wowebackand.models.Appoitement;
+import com.example.wowebackand.models.AppoitementForm;
 import com.example.wowebackand.models.filters.AppNotFilter;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public interface AppoitementNet
 //    Call<List<Appoitement>> getPendingAppoitements(Integer clientId);
 
     @POST("public/app/create")
-    Call<String> createAppoitement(@Body Appoitement appoitement);
+    Call<Integer> createAppoitement(@Body AppoitementForm appoitementForm);
 
     @POST("public/app/delete")
     Call<String> deleteAppoitement(@Body AppNotFilter filter);

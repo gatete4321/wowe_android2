@@ -9,19 +9,20 @@ import com.example.wowebackand.models.filters.AppNotFilter;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface NotificationNet
 {
     @POST("/public/notification/all")
-    public Call<List<Notification>> getNotifications(AppNotFilter filter);
+    public Call<List<Notification>> getNotifications(@Body AppNotFilter filter);
 
     @POST("/public/notification/create")
-    public Call<Integer> createNotification(NotificationForm notificationForm);
+    public Call<Integer> createNotification(@Body NotificationForm notificationForm);
 
     @POST("/public/notification/delete")
-    public Call<Integer> deleteNotification(Notification filter);
+    public Call<Integer> deleteNotification(@Body Notification filter);
 
     @POST("/public/notification/viewd")
-    public Call<Integer> updateView(Notification filter);
+    public Call<Integer> updateView(@Body Notification filter);
 }

@@ -25,7 +25,7 @@
             android:layout_height="34dp"
             android:layout_gravity="right|bottom"
             android:gravity="center"
-            android:text="gukanika"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="20dp"/>
         <ImageView
@@ -39,7 +39,7 @@
             android:id="@+id/make_app_tech_name"
             android:layout_width="125dp"
             android:layout_height="31dp"
-            android:text="paul250"
+            android:text=""
             android:textColor="@color/black"
             android:layout_gravity="bottom|left"
             android:gravity="center|left"
@@ -78,7 +78,7 @@
         android:ems="10"
         android:hint="kigali,kanombe"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:text="" />
 
     <TextView
         android:layout_width="match_parent"
@@ -94,12 +94,12 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Name" />
+        android:hint="bizakorwa gute" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="izakorwa"
+        android:text="DATE"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="20dp"/>
