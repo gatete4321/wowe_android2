@@ -24,11 +24,14 @@ public class Notification
 
     private Integer uyikoreweId;
 
+    private String uwayikozeName;
+
+
     @Ignore
     public Notification() {
     }
 
-    public Notification(Integer notficationId, Integer appoitementId, Integer status, Integer actionId, Date doneTime, Integer uwayikozeId, Integer uyikoreweId) {
+    public Notification(Integer notficationId, Integer appoitementId, Integer status, Integer actionId, Date doneTime, Integer uwayikozeId, Integer uyikoreweId, String uwayikozeName) {
         this.notficationId = notficationId;
         this.appoitementId = appoitementId;
         this.status = status;
@@ -36,6 +39,7 @@ public class Notification
         this.doneTime = doneTime;
         this.uwayikozeId = uwayikozeId;
         this.uyikoreweId = uyikoreweId;
+        this.uwayikozeName = uwayikozeName;
     }
 
     public Integer getNotficationId() {
@@ -92,5 +96,13 @@ public class Notification
 
     public void setDoneTime(Date doneTime) {
         this.doneTime = doneTime;
+    }
+
+    public String getUwayikozeName() {
+        return uwayikozeName;
+    }
+
+    public void setUwayikozeName(String uwayikozeName) {
+        this.uwayikozeName = uwayikozeName;
     }
 }

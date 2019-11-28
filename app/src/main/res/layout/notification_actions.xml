@@ -42,7 +42,7 @@
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:textSize="20dp"
-                android:text="gashumba liliane" />
+                android:text="name:" />
 
             <TextView
                 android:id="@+id/notification_actions_service_name"
@@ -51,7 +51,7 @@
                 android:layout_weight="1"
                 android:textSize="20dp"
                 android:gravity="center|left"
-                android:text="guteka" />
+                android:text="Service:" />
             <TextView
                 android:id="@+id/notification_actions_date"
                 android:layout_width="match_parent"

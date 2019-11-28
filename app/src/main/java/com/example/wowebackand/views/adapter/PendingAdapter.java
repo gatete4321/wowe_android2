@@ -99,7 +99,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyviewHo
     public void initializeAppoitements(){
         appoitements=new ArrayList<>();
         Appoitement appoitement ;
-        for (int i=0;i<=2;i++){
+        for (int i=0;i<=1;i++){
             appoitement=new Appoitement();
             appoitement.setTechId(R.drawable.abasuderezi);
             appoitement.setClientId(i);

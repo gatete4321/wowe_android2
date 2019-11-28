@@ -48,7 +48,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="8dp"
-            android:text="gatete rugamba"
+            android:text="name:"
             app:layout_constraintLeft_toLeftOf="@id/image_view_notification_action1"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -96,7 +96,7 @@
             android:layout_width="261dp"
             android:layout_height="35dp"
             android:layout_marginLeft="76dp"
-            android:text="izabera gikondo nu kubaka ikibuga"
+            android:text="Description:"
             android:textStyle="italic"
             app:layout_constraintLeft_toLeftOf="@id/image_view_notification_action1"
             app:layout_constraintTop_toBottomOf="@id/item_client_name_notification_action1" />

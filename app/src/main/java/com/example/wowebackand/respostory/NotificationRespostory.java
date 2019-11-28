@@ -11,6 +11,7 @@ import com.example.wowebackand.models.filters.AppNotFilter;
 
 import java.util.List;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import retrofit2.Call;
 
@@ -25,7 +26,7 @@ public class NotificationRespostory
         this.application = application;
     }
 
-    public MutableLiveData<List<Notification>> getNotifications(AppNotFilter filter){
+    public LiveData<List<Notification>> getNotifications(AppNotFilter filter){
         Call<List<Notification>> call=net.getNotifications(filter);
         DoNet<List<Notification>> doNet=new DoNet();
         call.enqueue(doNet);

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.wowebackand.R;
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.activities.MainActivity;
+import com.example.wowebackand.models.constant.Const;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,7 +45,7 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
         holder.serviceName.setText("wowe"+appoitement.getServiceId());
         holder.techName.setText("rukara"+appoitement.getClientId());
         holder.date.setText(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
-        holder.imageView.setImageResource(R.drawable.abasuderezi);
+        holder.imageView.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
         holder.view.setOnClickListener((view)->{
 
             Bundle bundle=new Bundle();
@@ -94,7 +95,7 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
     public void initializeAppoitements(){
         appoitements=new ArrayList<>();
         Appoitement appoitement ;
-        for (int i=0;i<=2;i++){
+        for (int i=0;i<=1;i++){
             appoitement=new Appoitement();
             appoitement.setTechId(i);
             appoitement.setClientId(i);

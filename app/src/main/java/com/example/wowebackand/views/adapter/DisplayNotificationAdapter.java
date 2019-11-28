@@ -47,32 +47,32 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
+        Notification notification = notifications.get(position);
         if (getItemViewType(position) == TYPE_ACT) {
-            Notification notification = notifications.get(position);
             ((NotAction1) holder).setAction1(notification);
             /**
              * 55 not allowed to make another notification
              */
 //            if (notification.getStatus() !=55) {
-                ((NotAction1) holder).accept.setOnClickListener((view) -> {
-                    /**
-                     * on accepted
-                     */
-                    createNotificaion(2, (NotificationForm) notification);
-                    Toast.makeText(context, "accepted", Toast.LENGTH_SHORT).show();
-                });
+            ((NotAction1) holder).accept.setOnClickListener((view) -> {
+                /**
+                 * on accepted
+                 */
+                createNotificaion(2, (NotificationForm) notification);
+                Toast.makeText(context, "accepted", Toast.LENGTH_SHORT).show();
+            });
 
 
-                ((NotAction1) holder).cancel.setOnClickListener(view -> {
-                    /**
-                     * on canceled
-                     */
-                    createNotificaion(3, (NotificationForm) notification);
-                    Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show();
-                });
+            ((NotAction1) holder).cancel.setOnClickListener(view -> {
+                /**
+                 * on canceled
+                 */
+                createNotificaion(3, (NotificationForm) notification);
+                Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show();
+            });
 //            }
         } else {
-            ((NotActionOthers) holder).setOthers(notifications.get(position));
+            ((NotActionOthers) holder).setOthers(notification);
         }
 
 
@@ -80,13 +80,14 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
 
     /**
      * this will hold the actionId that we want
-     * @param actionId the action
-     * @  the recent notification in order to be updated to 55
+     *
+     * @param actionId      the action
      * @param notification2 the appoitement id
+     * @ the recent notification in order to be updated to 55
      */
     private void createNotificaion(int actionId, NotificationForm notification2) {
-        respostory=new NotificationRespostory(null);
-        NotificationForm notification=new NotificationForm();
+        respostory = new NotificationRespostory(null);
+        NotificationForm notification = new NotificationForm();
         notification.setActionId(actionId);
         notification.setRecentNotificationId(notification2.getRecentNotificationId());
         notification.setAppoitementId(notification2.getAppoitementId());
@@ -95,12 +96,12 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
         respostory.insertNotification(notification);
 
 
-
     }
 
     @Override
     public int getItemCount() {
-        testData();
+        if (notifications == null)
+            testData();
         return notifications.size();
     }
 
@@ -118,18 +119,20 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
+        notifyDataSetChanged();
     }
 
     public void testData() {
         Notification notification;
         notifications = new ArrayList<>();
-        for (int a = 0; a <= 10; a++) {
+        for (int a = 0; a <= 1; a++) {
             notification = new Notification();
-            notification.setActionId(a > 5 ? a - 5 : a);
+            notification.setActionId(a);
             notification.setAppoitementId(a);
             notification.setUwayikozeId(a);
             notification.setUyikoreweId(a + 10);
             notification.setDoneTime(new Date());
+            notification.setUwayikozeName("mimi");
             notifications.add(notification);
         }
     }
@@ -142,7 +145,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
  */
 
 class NotAction1 extends RecyclerView.ViewHolder {
-    TextView cancel, accept, clientName, appDescr,date;
+    TextView cancel, accept, clientName, appDescr, date;
     ImageView serviceImage;
     View view;
 
@@ -153,20 +156,20 @@ class NotAction1 extends RecyclerView.ViewHolder {
         clientName = itemView.findViewById(R.id.item_client_name_notification_action1);
         appDescr = itemView.findViewById(R.id.notification_app_description);
         serviceImage = itemView.findViewById(R.id.image_view_notification_action1);
-        date=itemView.findViewById(R.id.item_date_notification_action1);
+        date = itemView.findViewById(R.id.item_date_notification_action1);
         view = itemView;
     }
 
     public void setAction1(Notification notification) {
-        clientName.setText(notification.getUwayikozeId() + "mwenyewe");
-        appDescr.setText(notification.getAppoitementId() + "kogosha inyamirambo");
+        clientName.append(notification.getUwayikozeName());
+        appDescr.append(notification.getAppoitementId() + "kogosha inyamirambo");
         serviceImage.setImageResource(Const.serviceIdImag(notification.getActionId()));
-        date.append(notification.getDoneTime().getDate()+"/"+notification.getDoneTime().getMonth()+"/"+notification.getDoneTime().getYear());
+        date.append(notification.getDoneTime().getDate() + "/" + notification.getDoneTime().getMonth() + "/" + (1900 + notification.getDoneTime().getYear()));
     }
 }
 
 class NotActionOthers extends RecyclerView.ViewHolder {
-    TextView techName, serviceName, umwanzuro,date;
+    TextView techName, serviceName, umwanzuro, date;
     ImageView techImage;
     View view;
 
@@ -176,16 +179,16 @@ class NotActionOthers extends RecyclerView.ViewHolder {
         serviceName = itemView.findViewById(R.id.notification_actions_service_name);
         umwanzuro = itemView.findViewById(R.id.notification_actions_message);
         techImage = itemView.findViewById(R.id.notification_tech_image);
-        date=itemView.findViewById(R.id.notification_actions_date);
+        date = itemView.findViewById(R.id.notification_actions_date);
         view = itemView;
     }
 
     public void setOthers(Notification notification) {
-        techName.setText("gatete" + notification.getUwayikozeId());
-        serviceName.setText("gufura");
+        techName.append(notification.getUwayikozeName());
+        serviceName.append("gufura");
         umwanzuro.setText(Const.namesAction(notification.getActionId()));
         techImage.setImageResource(Const.serviceIdImag(notification.getActionId()));
-        date.append(notification.getDoneTime().getDate()+"/"+notification.getDoneTime().getMonth()+"/"+notification.getDoneTime().getYear());
+        date.append(notification.getDoneTime().getDate() + "/" + notification.getDoneTime().getMonth() + "/" + (1900 + notification.getDoneTime().getYear()));
     }
 
 }

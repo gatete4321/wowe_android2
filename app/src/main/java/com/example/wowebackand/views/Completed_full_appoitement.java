@@ -1,5 +1,8 @@
 package com.example.wowebackand.views;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 import com.example.wowebackand.R;
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.constant.Const;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,7 +26,7 @@ import androidx.fragment.app.Fragment;
 
 public class Completed_full_appoitement extends Fragment
 {
-
+    Context context;
     Appoitement appoitement;
 
     Bundle bundle;
@@ -37,6 +41,7 @@ public class Completed_full_appoitement extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.display_completed_appoitement_view,container,false);
+        context=getContext();
         initializeViews(view);
         initializeData();
 
@@ -75,11 +80,20 @@ public class Completed_full_appoitement extends Fragment
         appoitement=bundle.getParcelable("completed");
         if (!appoitement.equals(null)){
             Log.e("commpleted","appoitement nago ari null");
-            createDate.append(appoitement.getCreateTime().getDate()+"/"+appoitement.getCreateTime().getMonth()+"/"+appoitement.getCreateTime().getYear());
-            serviceName.setText(Const.getServicesIdName(appoitement.getServiceId()));
-            doneTime.append(appoitement.getDoneTime().getDate()+"/"+appoitement.getDoneTime().getMonth()+"/"+appoitement.getDoneTime().getYear());
-            description.setText(appoitement.getDescription());
-            techName.setText(appoitement.getTechName());
+            createDate.append(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
+            serviceName.append(Const.getServicesIdName(appoitement.getServiceId()));
+            doneTime.append(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
+            description.append(appoitement.getDescription());
+            techName.append(appoitement.getTechName());
+            if (!isNetworkAvaible()){
+                initializeImages(appoitement.getClientId(),techPic);
+            }
+            else {
+                techPic.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
+            }
+
+
+
             if (appoitement.getRate()!=null){
                 ratingBar.setRating(appoitement.getRate());
             }
@@ -103,24 +117,18 @@ public class Completed_full_appoitement extends Fragment
         ratingBar=view.findViewById(R.id.app_view_ratingBar);
     }
 
-    /**
-     * this will get all data to be displayed on the appointement form
-     */
-    public void setData(){
-
+    void initializeImages(Integer imageId,ImageView imageView){
+        String full= Const.urlImageId+imageId;
+        Picasso.with(context)
+                .load(full)
+                .fit()
+                .centerInside()
+                .into(imageView);
     }
-
-    /**
-     * this will handle all onclick events
-     */
-    public void onClickListeners(){
-        delete.setOnClickListener((view)->{
-            //delete the appoitement
-        });
-
-        submit.setOnClickListener((view)->{
-            //submit ratings
-            //submit feedback
-        });
+    private boolean isNetworkAvaible() {
+        ConnectivityManager connectivityManager=
+                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+        return networkInfo!=null && networkInfo.isConnected();
     }
 }

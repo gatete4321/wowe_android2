@@ -27,4 +27,5 @@ public class MyPicasso
         imageurl=imageurl+imageurl;
         Picasso.with(context).load(imageurl).resize(width,height).into(resource);
     }
+
 }

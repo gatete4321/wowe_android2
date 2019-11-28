@@ -1,5 +1,8 @@
 package com.example.wowebackand.views;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import com.example.wowebackand.R;
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.constant.Const;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +28,7 @@ import androidx.fragment.app.Fragment;
  */
 public class pending_full_appoitement extends Fragment
 {
+    Context context;
     Integer phoneNumber;
     String loct,descr;
 
@@ -38,13 +43,14 @@ public class pending_full_appoitement extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.layout_edit_appoitement,container,false);
+        context=getContext();
         initializeViews(view);
 
         Bundle bundle=getArguments();
         if (bundle!=null){
-            Log.e("bundle","bundle is not null");
+
             appoitement= bundle.getParcelable("data");
-            Log.e("datas", "not null"+appoitement.getClientId());
+
         }
         initializeFakeData();
 
@@ -72,15 +78,30 @@ public class pending_full_appoitement extends Fragment
             techName.setText("gahire"+appoitement.getServiceId());
             techPic.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
             calendarView.setDate(appoitement.getDoneTime().getTime());
+            if (isNetworkAvaible()){
+                initializeImages(appoitement.getClientId(),techPic);
+            }
+            else
+                techPic.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
             Log.e("passing","appoitement is not null");
             return;
         }
-        serviceName.setText("gukanika");
-        techName.setText("gahire");
-        techPic.setImageResource(R.drawable.header);
-//        phoneNumber=phone.getInputExtras(true).getInt("phone");
-        calendarView.setOnDateChangeListener((view,i,i1,i2)->{
-            serviceName.setText((i1+1)+"/"+i2+"/"+i);
-        });
+
+    }
+
+
+    void initializeImages(Integer imageId,ImageView imageView){
+        String full= Const.urlImageId+imageId;
+        Picasso.with(context)
+                .load(full)
+                .fit()
+                .centerInside()
+                .into(imageView);
+    }
+    private boolean isNetworkAvaible() {
+        ConnectivityManager connectivityManager=
+                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+        return networkInfo!=null && networkInfo.isConnected();
     }
 }
