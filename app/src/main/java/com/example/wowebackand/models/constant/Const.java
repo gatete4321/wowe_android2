@@ -7,11 +7,22 @@ import java.util.Map;
 
 public  class Const
 {
+    public static  Integer userId=0;
+
+    public static String email="";
+
+    public static String token="";
+
+    public static String userName="";
 
     public static final String url="http://10.0.2.2:9000";
 
     public static final String urlImage="http://10.0.2.2:9000/public/pic/download?filename=";
     public static final String urlImageId="http://10.0.2.2:9000/public/pic/downloadId?id=";
+
+
+
+
 
     public static String getnotificationAction(int key){
         switch (key){

@@ -1,7 +1,6 @@
 package com.example.wowebackand.views.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,7 +92,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
         notification.setAppoitementId(notification2.getAppoitementId());
         notification.setUwayikozeId(notification2.getUyikoreweId());
         notification.setUyikoreweId(notification2.getUwayikozeId());
-        respostory.insertNotification(notification);
+        respostory.createNotification(notification);
 
 
     }
@@ -119,13 +118,13 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
-        notifyDataSetChanged();
+
     }
 
     public void testData() {
         Notification notification;
         notifications = new ArrayList<>();
-        for (int a = 0; a <= 1; a++) {
+        for (int a = 0; a <1; a++) {
             notification = new Notification();
             notification.setActionId(a);
             notification.setAppoitementId(a);

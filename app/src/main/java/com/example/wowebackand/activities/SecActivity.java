@@ -25,5 +25,11 @@ public class SecActivity extends AppCompatActivity {
 //        controller.navigate(R.id.FirstFragment);
     }
 
-
+    /**
+     * i am gona to force no back presed
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Notification
 {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate=false)
     private Integer notficationId;
 
     private Integer appoitementId;

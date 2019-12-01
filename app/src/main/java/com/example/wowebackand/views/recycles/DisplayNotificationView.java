@@ -49,6 +49,7 @@ public class DisplayNotificationView extends Fragment {
 
         viewModel.getNotificationLiveData().observe(this,(notifications1)->{
             adapter.setNotifications(notifications1);
+            adapter.notifyDataSetChanged();
         });
 
         recyclerView.setAdapter(adapter);

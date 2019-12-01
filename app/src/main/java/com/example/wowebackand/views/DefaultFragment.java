@@ -33,7 +33,7 @@ public class DefaultFragment extends Fragment {
 
     BottomNavigationView bottomNavigationView;
 
-    NavController navController;
+    public static NavController navController;
 
     @Override
     public void onAttach(Context context) {

@@ -122,7 +122,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:text="delete"
+        android:text="cancel"
         android:id="@+id/edit_app_button_delete"
         />
 

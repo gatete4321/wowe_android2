@@ -16,6 +16,8 @@ import com.example.wowebackand.R;
 import com.example.wowebackand.activities.MainActivity;
 import com.example.wowebackand.activities.SecActivity;
 import com.example.wowebackand.models.Client;
+import com.example.wowebackand.models.ClientForm;
+import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.models.filters.ClientFilter;
 import com.example.wowebackand.respostory.ClientRespostory;
 import com.example.wowebackand.viewModel.MainViewModel;
@@ -51,32 +53,41 @@ public class LogIn extends Fragment {
 
         intent = new Intent(getActivity(), MainActivity.class);
 
-        if (preferences.contains("userName") && preferences.contains("password")) {
-            startActivity(intent);
-        }
+//        if (preferences.contains("userName") && preferences.contains("password")) {
+//            startActivity(intent);
+//        }
 
         signIn.setOnClickListener((view1) -> {
             uName = userName.getText().toString();
             pwd = password.getText().toString();
             if (checkString(uName, pwd)) {
+//
+//                if (uName.equals("didox") && pwd.equals("wowe")) {
+//                    SharedPreferences.Editor editor = preferences.edit();
+//                    editor.putString("userName", uName);
+//                    editor.putString("password", pwd);
+//                    editor.commit();
+//                    startActivity(intent);
+//                }
 
-                if (uName.equals("didox") && pwd.equals("wowe")) {
+
+
+                ClientForm client=clientExist(userName.getText().toString(),password.getText().toString());
+                if (client!=null){
+                    /**
+                     * ndaza gukoresha iriya clientId nkoresheje MainViewModel.class
+                     * maze nkurure completed,pending appoitements hamwe
+                     */
                     SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("userName", uName);
+                    editor.putString("token",client.getToken());
+                    editor.putString("userName",uName);
                     editor.putString("password", pwd);
+                    editor.putInt("clientId",client.getClientId());
                     editor.commit();
-                    startActivity(intent);
-                }
-
-//                Client client=clientExist(userName.getText().toString(),password.getText().toString());
-//                if (client!=null){
-//                    /**
-//                     * ndaza gukoresha iriya clientId nkoresheje MainViewModel.class
-//                     * maze nkurure completed,pending appoitements hamwe
-//                     */
 //                    MainViewModel.setClientId(client.getClientId());
 //                    MainActivity.navController.navigate(R.id.defaultFragment);
-//                }
+                    startActivity(intent);
+                }
                 else {
                     Toast.makeText(getContext(), "the user does not exist", Toast.LENGTH_SHORT).show();
                 }
@@ -116,12 +127,20 @@ public class LogIn extends Fragment {
         return check;
     }
 
-    public Client clientExist(String username, String password) {
+    public ClientForm clientExist(String username, String password) {
+        respostory=new ClientRespostory();
         ClientFilter filter = new ClientFilter();
         filter.setUsername(username);
         filter.setPassword(password);
-//        Client client=respostory.login(filter);
-        return null;
+        ClientForm client=respostory.login(filter);
+
+        return client;
+
+    }
+
+
+    public void  login(){
+
     }
 
 }

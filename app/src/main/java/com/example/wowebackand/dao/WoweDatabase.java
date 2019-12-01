@@ -17,7 +17,7 @@ public abstract class WoweDatabase extends RoomDatabase {
 
     public abstract AppoitementDao appoitementDao();
 
-    public abstract NotificationDao notificaionDao();
+    public abstract NotificationDao notificationDao();
 
     public static synchronized WoweDatabase getInstance(Context context) {
         if (instance==null){

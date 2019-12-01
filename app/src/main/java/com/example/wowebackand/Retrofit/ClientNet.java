@@ -2,6 +2,7 @@ package com.example.wowebackand.Retrofit;
 
 
 import com.example.wowebackand.models.Client;
+import com.example.wowebackand.models.ClientForm;
 import com.example.wowebackand.models.filters.ClientFilter;
 
 import java.util.List;
@@ -23,8 +24,8 @@ public interface ClientNet
     Call<Integer> updateClient(@Body ClientFilter filter);
 
 
-    @POST("public/client/info")
-    Call<Client> getClient(@Body ClientFilter filter);
+    @POST("public/client/login")
+    Call<ClientForm> getClient(@Body ClientFilter filter);
 
     /**
      * get list of techinicians
@@ -36,5 +37,6 @@ public interface ClientNet
 
     @POST("public/client/password")
     Call<Integer> updatePassword(@Body ClientFilter filter);
+
 
 }

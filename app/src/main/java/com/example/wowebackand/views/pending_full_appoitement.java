@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wowebackand.R;
+import com.example.wowebackand.activities.MainActivity;
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.constant.Const;
+import com.example.wowebackand.respostory.AppoitementRespostory;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -28,6 +30,7 @@ import androidx.fragment.app.Fragment;
  */
 public class pending_full_appoitement extends Fragment
 {
+    AppoitementRespostory respostory;
     Context context;
     Integer phoneNumber;
     String loct,descr;
@@ -53,6 +56,12 @@ public class pending_full_appoitement extends Fragment
 
         }
         initializeFakeData();
+
+        delete.setOnClickListener((view1)->{
+            respostory=new AppoitementRespostory(null);
+            respostory.deleteAppoitement(appoitement.getAppoitementId());
+            DefaultFragment.navController.navigate(R.id.pendingFragment);
+        });
 
 
         return view;

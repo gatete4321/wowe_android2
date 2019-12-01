@@ -22,6 +22,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.wowebackand.R;
 
+import com.example.wowebackand.models.constant.Const;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -167,5 +168,16 @@ public class MainActivity extends AppCompatActivity implements
             dialog.dismiss();
         });
         dialog.show();
+    }
+
+    /**
+     * i am gona to get all shared preference and assign to they values
+     */
+    public void initializeUser(){
+        SharedPreferences.Editor editor=sharedPreferences.edit();
+//        Const.token=editor.
+//        Const.email=editor.
+//    Const.userId=editor.
+
     }
 }

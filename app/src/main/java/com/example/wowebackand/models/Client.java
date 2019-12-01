@@ -48,6 +48,7 @@ public class Client implements Parcelable
     //the client the service does
     private Integer serviceId;
 
+
     public Client(){
 
     }

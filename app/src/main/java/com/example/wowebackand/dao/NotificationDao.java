@@ -14,12 +14,16 @@ import androidx.room.Query;
 @Dao
 public interface NotificationDao
 {
-    @Insert
-    void insertNotification(Notification notification);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void InsertNotifications(List<Notification> notifications);
     @Delete
     void deleteNoification(Notification notification);
     @Query("SELECT * FROM Notification")
     LiveData<List<Notification>> getAll();
+
+    @Query("SELECT notficationId FROM Notification ORDER BY notficationId DESC LIMIT 1")
+    Integer getLastNotificationId();
+    @Query("select last_insert_rowid()  from Notification")
+    Integer getLastIdNotification();
 }

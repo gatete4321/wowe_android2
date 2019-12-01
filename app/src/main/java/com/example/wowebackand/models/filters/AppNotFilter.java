@@ -14,6 +14,16 @@ public class AppNotFilter
 
     private Integer status;
 
+    private Integer appoitementId;
+
+    public Integer getAppoitementId() {
+        return appoitementId;
+    }
+
+    public void setAppoitementId(Integer appoitementId) {
+        this.appoitementId = appoitementId;
+    }
+
     public Integer getStatus() {
         return status;
     }

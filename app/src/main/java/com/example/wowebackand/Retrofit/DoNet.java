@@ -31,8 +31,9 @@ public class DoNet<T> implements Callback<T> {
 
     public NotificationDao notificationDao;
 
-    public DoNet(AppoitementDao dao) {
+    public DoNet(AppoitementDao dao,NotificationDao notificationDao) {
         this.dao = dao;
+        this.notificationDao=notificationDao;
     }
 
     public DoNet() {

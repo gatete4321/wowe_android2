@@ -23,6 +23,4 @@ public interface NotificationNet
     @POST("/public/notification/delete")
     public Call<Integer> deleteNotification(@Body Notification filter);
 
-    @POST("/public/notification/viewd")
-    public Call<Integer> updateView(@Body Notification filter);
 }

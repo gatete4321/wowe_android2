@@ -235,7 +235,7 @@ public class MyProfile extends Fragment {
         filter.setRecentPassword(recent);
         filter.setPassword(password);
 
-        respostory = new ClientRespostory(null);
+        respostory = new ClientRespostory();
         check=respostory.updateDatas(filter,1);
         return check;
     }
@@ -255,7 +255,7 @@ public class MyProfile extends Fragment {
                 filter.setEmail(data);
         }
 
-        respostory = new ClientRespostory(null);
+        respostory = new ClientRespostory();
         check=respostory.updateDatas(filter,2);
         ClientRespostory.check=false;
         return check;
