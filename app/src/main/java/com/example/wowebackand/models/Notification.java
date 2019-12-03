@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Notification
 {
-    @PrimaryKey(autoGenerate=false)
+    @PrimaryKey(autoGenerate=true)
     private Integer notficationId;
 
     private Integer appoitementId;
@@ -105,4 +105,5 @@ public class Notification
     public void setUwayikozeName(String uwayikozeName) {
         this.uwayikozeName = uwayikozeName;
     }
+
 }

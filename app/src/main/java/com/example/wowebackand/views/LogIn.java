@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wowebackand.R;
+import com.example.wowebackand.Retrofit.ClientNet;
+import com.example.wowebackand.Retrofit.RetrofitService;
 import com.example.wowebackand.activities.MainActivity;
 import com.example.wowebackand.activities.SecActivity;
 import com.example.wowebackand.models.Client;
@@ -26,7 +29,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class LogIn extends Fragment {
+    ClientNet net;
     String uName, pwd;
     SharedPreferences preferences;
     Intent intent;
@@ -35,8 +43,7 @@ public class LogIn extends Fragment {
     EditText userName, password;
     Button signIn;
     TextView forget, create;
-
-    ClientRespostory respostory;
+    ClientForm clientForm;
 
 
     @Nullable
@@ -81,7 +88,8 @@ public class LogIn extends Fragment {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putString("token",client.getToken());
                     editor.putString("userName",uName);
-                    editor.putString("password", pwd);
+                    editor.putString("phone", client.getPhoneNumber());
+                    editor.putString("email",client.getEmail());
                     editor.putInt("clientId",client.getClientId());
                     editor.commit();
 //                    MainViewModel.setClientId(client.getClientId());
@@ -128,19 +136,41 @@ public class LogIn extends Fragment {
     }
 
     public ClientForm clientExist(String username, String password) {
-        respostory=new ClientRespostory();
+//        respostory=new ClientRespostory();
         ClientFilter filter = new ClientFilter();
         filter.setUsername(username);
         filter.setPassword(password);
-        ClientForm client=respostory.login(filter);
+        ClientForm client=login(filter);
 
         return client;
 
     }
 
 
-    public void  login(){
+    public ClientForm login(ClientFilter filter){
+        net= RetrofitService.createService(ClientNet.class);
+        Call<ClientForm> call;
 
+        call=net.getClient(filter);
+
+        call.enqueue(new Callback<ClientForm>() {
+
+            @Override
+            public void onResponse(Call<ClientForm> call, Response<ClientForm> response) {
+                clientForm=response.body();
+                Log.e("onResponse","muri response");
+                return;
+            }
+
+            @Override
+            public void onFailure(Call<ClientForm> call, Throwable t) {
+                Log.e("login","kubera"+t.getMessage());
+//                Toast.makeText()`
+                return;
+            }
+        });
+        Log.e("main","muri main Thread");
+        return clientForm;
     }
 
 }

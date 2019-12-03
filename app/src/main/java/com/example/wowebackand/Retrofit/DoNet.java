@@ -60,12 +60,13 @@ public class DoNet<T> implements Callback<T> {
         }
 
         liveData.postValue(response.body());
-
+        return;
     }
 
     @Override
     public void onFailure(Call<T> call, Throwable t) {
         Log.e("onFailure", t.getMessage());
+        return;
     }
 
 

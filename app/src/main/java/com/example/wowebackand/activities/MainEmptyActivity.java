@@ -19,7 +19,7 @@ public class MainEmptyActivity extends AppCompatActivity
         preferences = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
 
         Intent activityIntent;
-        if (preferences.contains("userName") && preferences.contains("password")){//hano tura chekinga token man
+        if (preferences.contains("clientId") && preferences.contains("token")){//hano tura chekinga token man
             activityIntent=new Intent(this, MainActivity.class);
         }
         else {

@@ -3,6 +3,7 @@ package com.example.wowebackand.views;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wowebackand.R;
+import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.models.filters.ClientFilter;
 import com.example.wowebackand.respostory.ClientRespostory;
 
@@ -66,6 +68,12 @@ public class MyProfile extends Fragment {
      * but i yhink i will use the viewmodel to save data for long time
      */
     private void initializeData() {
+        userName.setText(Const.userName);
+        Log.e("username",Const.userName+"");
+        email.setText(Const.email+"");
+        Log.e("email",Const.email+"");
+        phone.setText(Const.phone);
+        Log.e("phone",Const.phone+"");
     }
 
     /**

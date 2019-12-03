@@ -2,6 +2,7 @@ package com.example.wowebackand.respostory;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.example.wowebackand.Retrofit.DoNet;
 import com.example.wowebackand.Retrofit.NotificationNet;
@@ -41,6 +42,7 @@ public class NotificationRespostory
 
             insertNotificationDataInDatabase(filter,dao,net);
 //        },2000);
+
         return dao.getAll();
     }
 

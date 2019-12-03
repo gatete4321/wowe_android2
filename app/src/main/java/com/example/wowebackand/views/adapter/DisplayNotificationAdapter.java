@@ -57,7 +57,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
                 /**
                  * on accepted
                  */
-                createNotificaion(2, (NotificationForm) notification);
+                createNotificaion(2, notification);
                 Toast.makeText(context, "accepted", Toast.LENGTH_SHORT).show();
             });
 
@@ -66,7 +66,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
                 /**
                  * on canceled
                  */
-                createNotificaion(3, (NotificationForm) notification);
+                createNotificaion(3, notification);
                 Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show();
             });
 //            }
@@ -84,14 +84,15 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
      * @param notification2 the appoitement id
      * @ the recent notification in order to be updated to 55
      */
-    private void createNotificaion(int actionId, NotificationForm notification2) {
+    private void createNotificaion(int actionId, Notification notification2) {
         respostory = new NotificationRespostory(null);
         NotificationForm notification = new NotificationForm();
         notification.setActionId(actionId);
-        notification.setRecentNotificationId(notification2.getRecentNotificationId());
+        notification.setRecentNotificationId(notification2.getNotficationId());
         notification.setAppoitementId(notification2.getAppoitementId());
         notification.setUwayikozeId(notification2.getUyikoreweId());
         notification.setUyikoreweId(notification2.getUwayikozeId());
+        notification.setUwayikozeName("aha sharedpreference");
         respostory.createNotification(notification);
 
 

@@ -10,9 +10,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,16 +26,15 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.wowebackand.R;
 
 import com.example.wowebackand.models.constant.Const;
+import com.example.wowebackand.respostory.AppoitementRespostory;
 import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener
-{
+        NavigationView.OnNavigationItemSelectedListener {
 
     SharedPreferences sharedPreferences;
     Intent intent;
-
 
 
     Dialog dialog;
@@ -47,12 +49,15 @@ public class MainActivity extends AppCompatActivity implements
 
     public NavigationView navigationView;
     LinearLayout linearLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        linearLayout=findViewById(R.id.my_linear_layout);
+        linearLayout = findViewById(R.id.my_linear_layout);
         setupNavigation();
+//        if (AppoitementRespostory.i <= 1)
+            initializeUser();
     }
 
     private void setupNavigation() {
@@ -64,14 +69,12 @@ public class MainActivity extends AppCompatActivity implements
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-
-
 //        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
 
-        navigationView =findViewById(R.id.navigationView);
+        navigationView = findViewById(R.id.navigationView);
 
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -90,9 +93,6 @@ public class MainActivity extends AppCompatActivity implements
     public boolean onSupportNavigateUp() {
         return NavigationUI.navigateUp(drawerLayout, Navigation.findNavController(this, R.id.nav_host_fragment));
     }
-
-
-
 
 
     @Override
@@ -142,29 +142,29 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    void logoutP(){
-        TextView logout,cancel;
+    void logoutP() {
+        TextView logout, cancel;
 
-        sharedPreferences=getSharedPreferences("userDetails",MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("userDetails", MODE_PRIVATE);
 
-        intent=new Intent(MainActivity.this,SecActivity.class);
+        intent = new Intent(MainActivity.this, SecActivity.class);
 
-        dialog=new Dialog(this);
+        dialog = new Dialog(this);
         dialog.setContentView(R.layout.dialbox_logout);
-        logout=dialog.findViewById(R.id.real_logout);
-        cancel=dialog.findViewById(R.id.cancel_logout);
-        cancel.setOnClickListener((view)->{
+        logout = dialog.findViewById(R.id.real_logout);
+        cancel = dialog.findViewById(R.id.cancel_logout);
+        cancel.setOnClickListener((view) -> {
             dialog.dismiss();
         });
-        logout.setOnClickListener((view)->{
-            SharedPreferences.Editor editor=sharedPreferences.edit();
+        logout.setOnClickListener((view) -> {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.commit();
             startActivity(intent);
             /**
              * tuzahasyira code zo ku loginga out
              */
-            Toast.makeText(this,"log out",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "log out", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         });
         dialog.show();
@@ -173,10 +173,16 @@ public class MainActivity extends AppCompatActivity implements
     /**
      * i am gona to get all shared preference and assign to they values
      */
-    public void initializeUser(){
-        SharedPreferences.Editor editor=sharedPreferences.edit();
-//        Const.token=editor.
-//        Const.email=editor.
+    public void initializeUser() {
+//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        sharedPreferences= getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+
+        Const.token = sharedPreferences.getString("token", "token");
+        Const.email = sharedPreferences.getString("email", "email");
+        Const.userId = sharedPreferences.getInt("clientId", 0);
+        Const.userName = sharedPreferences.getString("userName", "user");
+        Log.e("mainActivity","initializing shared preference");
 //    Const.userId=editor.
 
     }

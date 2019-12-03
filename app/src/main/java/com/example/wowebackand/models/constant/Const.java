@@ -7,13 +7,16 @@ import java.util.Map;
 
 public  class Const
 {
-    public static  Integer userId=0;
+    public static  Integer userId;
 
-    public static String email="";
+    public static String email;
 
-    public static String token="";
+    public static String token;
 
-    public static String userName="";
+    public static String userName;
+
+    public static String phone;
+
 
     public static final String url="http://10.0.2.2:9000";
 
