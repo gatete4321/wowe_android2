@@ -108,4 +108,8 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyviewHo
             appoitements.add(appoitement);
         }
     }
+
+    public Appoitement getAppoitementByPos(int position){
+        return appoitements.get(position);
+    }
 }

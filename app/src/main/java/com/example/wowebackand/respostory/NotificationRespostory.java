@@ -7,8 +7,10 @@ import android.util.Log;
 import com.example.wowebackand.Retrofit.DoNet;
 import com.example.wowebackand.Retrofit.NotificationNet;
 import com.example.wowebackand.Retrofit.RetrofitService;
+import com.example.wowebackand.dao.AppoitementDao;
 import com.example.wowebackand.dao.NotificationDao;
 import com.example.wowebackand.dao.WoweDatabase;
+import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.Notification;
 import com.example.wowebackand.models.NotificationForm;
 import com.example.wowebackand.models.filters.AppNotFilter;
@@ -53,7 +55,7 @@ public class NotificationRespostory
         return  doNet.getLiveData().getValue();
     }
 
-    public Integer deleteNotification(Notification notification){
+    public Integer cancelNotification(Notification notification){
 
         Call<Integer> call=net.deleteNotification(notification);
         DoNet<Integer> doNet=new DoNet<>();
@@ -61,6 +63,9 @@ public class NotificationRespostory
         return doNet.getLiveData().getValue();
     }
 
+    public void deleteNotification(Notification notification){
+        new DeleteNotification(dao).execute(notification);
+    }
 
     public static void insertNotificationDataInDatabase(AppNotFilter filter, NotificationDao dao, NotificationNet notificationNet) {
         e++;
@@ -111,4 +116,17 @@ public class NotificationRespostory
         }
     }
 
+    private static class DeleteNotification extends AsyncTask<Notification,Void,Void>{
+        private NotificationDao notificationDao;
+
+        public DeleteNotification(NotificationDao notificationDao) {
+            this.notificationDao=notificationDao;
+        }
+
+        @Override
+        protected Void doInBackground(Notification... notifications) {
+            notificationDao.deleteNoification(notifications[0]);
+            return null;
+        }
+    }
 }

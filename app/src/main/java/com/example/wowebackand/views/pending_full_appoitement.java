@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.wowebackand.R;
-import com.example.wowebackand.activities.MainActivity;
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.respostory.AppoitementRespostory;
@@ -59,7 +58,7 @@ public class pending_full_appoitement extends Fragment
 
         delete.setOnClickListener((view1)->{
             respostory=new AppoitementRespostory(null);
-            respostory.deleteAppoitement(appoitement.getAppoitementId());
+            respostory.cancelAppoitement(appoitement.getAppoitementId());
             DefaultFragment.navController.navigate(R.id.pendingFragment);
         });
 

@@ -34,4 +34,9 @@ public class NotificationViewModel extends AndroidViewModel{
     }
 
 
+    public void deleteNot(Notification notification){
+        respostory.deleteNotification(notification);
+    }
+
+
 }

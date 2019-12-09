@@ -11,6 +11,7 @@ import com.example.wowebackand.R;
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.activities.MainActivity;
 import com.example.wowebackand.models.constant.Const;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +27,8 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
 
     private List<Appoitement> appoitements;
 
-    private MyOnRecyclerListener listener;
+
+
 
     public CompletedAdapter() {
     }
@@ -41,21 +43,22 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
 
     @Override
     public void onBindViewHolder(@NonNull CompletedAdapter.MyCompletedViewHoleder holder, int position) {
-        Appoitement appoitement=appoitements.get(position);
-        holder.serviceName.setText("wowe"+appoitement.getServiceId());
-        holder.techName.setText("rukara"+appoitement.getClientId());
-        holder.date.setText(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
-        holder.imageView.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
-        holder.view.setOnClickListener((view)->{
+            Appoitement appoitement = appoitements.get(position);
+            holder.serviceName.setText("wowe" + appoitement.getServiceId());
+            holder.techName.setText("rukara" + appoitement.getClientId());
+            holder.date.setText(appoitement.getDoneTime().getDay() + "/" + appoitement.getDoneTime().getMonth() + "/" + (1900 + appoitement.getDoneTime().getYear()));
+            holder.imageView.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
+            holder.view.setOnClickListener((view) -> {
 
-            Bundle bundle=new Bundle();
-            bundle.putParcelable("completed",appoitement);
-            MainActivity.navController.navigate(R.id.completedForm,bundle);
-        });
-        holder.serviceName.setOnClickListener((view)->{
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("completed", appoitement);
+                MainActivity.navController.navigate(R.id.completedForm, bundle);
+            });
+            holder.serviceName.setOnClickListener((view) -> {
 //            listener.onRecyclerViewItemCliked(position,view.getId());
-        });
-    }
+            });
+        }
+
 
     @Override
     public int getItemCount() {
@@ -79,6 +82,7 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
             serviceName=itemView.findViewById(R.id.completed_item_text_view_service_name);
             date=itemView.findViewById(R.id.completed_item_date_display);
             techName=itemView.findViewById(R.id.completed_item_display_tech_name);
+//            shimmerFrameLayout=itemView.findViewById(R.id.shimmer_layout_completed);
 
             view=itemView;
 
@@ -104,5 +108,13 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
             appoitements.add(appoitement);
             appoitement.setCreateTime(new Date());
         }
+    }
+
+    public List<Appoitement> getAppoitements() {
+        return appoitements;
+    }
+
+    public Appoitement getAppByPos(int  postion){
+        return appoitements.get(postion);
     }
 }

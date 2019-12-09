@@ -1,6 +1,7 @@
 package com.example.wowebackand.views.recycles;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +31,7 @@ import java.util.List;
 public class DisplayFragComplete extends Fragment {
     List<Appoitement> appoitementList;
     View view;
+    CompletedAdapter adapter;
     private CompletedViewModel viewModel;
     private RecyclerView recyclerView;
 
@@ -40,16 +43,38 @@ public class DisplayFragComplete extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
         viewModel = ViewModelProviders.of(this).get(CompletedViewModel.class);
-        CompletedAdapter adapter = new CompletedAdapter();
+        adapter = new CompletedAdapter();
         viewModel.getLiveData().observe(this, appoitements -> {
-           if (appoitements!=null)
-               adapter.setAppoitements(appoitements);
-           else
-               noData();
+//            appoitementList=appoitements;
+            adapter.setAppoitements(appoitements);
+            adapter.notifyDataSetChanged();
         });
+
         recyclerView.setAdapter(adapter);
 
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT){
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
 
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                viewModel.deleteAppoitement(adapter.getAppByPos(viewHolder.getAdapterPosition()));
+                Toast.makeText(getActivity(),"deleted",Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerView);
+
+
+//        if (appoitementList != null) {
+//            adapter.setAppoitements(appoitementList);
+//            adapter.setAppoitements(appoitementList);
+//            adapter.showShimer=false;
+//            adapter.notifyDataSetChanged();
+//        }
+//        else {
+//            noData();
+//        }
         return view;
     }
 

@@ -25,8 +25,8 @@ public class PendingViewModel extends AndroidViewModel
         respostory=new AppoitementRespostory(application);
     }
 
-    public void deleteAppoitement(){
-
+    public void deleteAppoitement(Appoitement appoitement){
+        respostory.deleteAppoitement(appoitement);
     }
 
     public LiveData<List<Appoitement>> getLiveData(){

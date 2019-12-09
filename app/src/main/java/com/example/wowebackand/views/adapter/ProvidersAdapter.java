@@ -123,18 +123,6 @@ public class ProvidersAdapter extends RecyclerView.Adapter<ProvidersAdapter.MyPr
 
 
 
-    public void initialize(){
-        technicians=new ArrayList<>();
-        Client client;
-        for (int i=0;i<=15;i++){
-            client=new Client();
-            client.setUsername("rukara"+i);
-            client.setPassword("electromechanic"+i);
-            technicians.add(client);
-        }
-    }
-
-
     void initializeImages(String imageName,ImageView imageView){
         String full= Const.urlImage+imageName;
         Picasso.with(context)

@@ -16,6 +16,7 @@ import com.example.wowebackand.models.Notification;
 import com.example.wowebackand.models.NotificationForm;
 import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.respostory.NotificationRespostory;
+import com.facebook.shimmer.ShimmerFrameLayout;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,37 +46,35 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-        Notification notification = notifications.get(position);
-        if (getItemViewType(position) == TYPE_ACT) {
-            ((NotAction1) holder).setAction1(notification);
-            /**
-             * 55 not allowed to make another notification
-             */
+            Notification notification = notifications.get(position);
+            if (getItemViewType(position) == TYPE_ACT) {
+                ((NotAction1) holder).setAction1(notification);
+                /**
+                 * 55 not allowed to make another notification
+                 */
 //            if (notification.getStatus() !=55) {
-            ((NotAction1) holder).accept.setOnClickListener((view) -> {
-                /**
-                 * on accepted
-                 */
-                createNotificaion(2, notification);
-                Toast.makeText(context, "accepted", Toast.LENGTH_SHORT).show();
-            });
+                ((NotAction1) holder).accept.setOnClickListener((view) -> {
+                    /**
+                     * on accepted
+                     */
+                    createNotificaion(2, notification);
+                    Toast.makeText(context, "accepted", Toast.LENGTH_SHORT).show();
+                });
 
 
-            ((NotAction1) holder).cancel.setOnClickListener(view -> {
-                /**
-                 * on canceled
-                 */
-                createNotificaion(3, notification);
-                Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show();
-            });
+                ((NotAction1) holder).cancel.setOnClickListener(view -> {
+                    /**
+                     * on canceled
+                     */
+                    createNotificaion(3, notification);
+                    Toast.makeText(context, "canceled", Toast.LENGTH_SHORT).show();
+                });
 //            }
-        } else {
-            ((NotActionOthers) holder).setOthers(notification);
+            } else {
+                ((NotActionOthers) holder).setOthers(notification);
+            }
         }
 
-
-    }
 
     /**
      * this will hold the actionId that we want
@@ -107,10 +106,10 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public int getItemViewType(int position) {
-        if (notifications.get(position).getActionId() == 1)
-            return TYPE_ACT;
-        else
-            return TYPE_OTHERS;
+            if (notifications.get(position).getActionId() == 1)
+                return TYPE_ACT;
+            else
+                return TYPE_OTHERS;
     }
 
     public List<Notification> getNotifications() {
@@ -125,7 +124,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
     public void testData() {
         Notification notification;
         notifications = new ArrayList<>();
-        for (int a = 0; a <1; a++) {
+        for (int a = 0; a < 1; a++) {
             notification = new Notification();
             notification.setActionId(a);
             notification.setAppoitementId(a);
@@ -135,6 +134,10 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
             notification.setUwayikozeName("mimi");
             notifications.add(notification);
         }
+    }
+
+    public Notification getNotByPos(int position){
+        return notifications.get(position);
     }
 
 }
@@ -161,10 +164,10 @@ class NotAction1 extends RecyclerView.ViewHolder {
     }
 
     public void setAction1(Notification notification) {
-        clientName.append(notification.getUwayikozeName());
-        appDescr.append(notification.getAppoitementId() + "kogosha inyamirambo");
+        clientName.setText("name:"+notification.getUwayikozeName());
+        appDescr.setText("descr:"+notification.getAppoitementId() + "kogosha inyamirambo");
         serviceImage.setImageResource(Const.serviceIdImag(notification.getActionId()));
-        date.append(notification.getDoneTime().getDate() + "/" + notification.getDoneTime().getMonth() + "/" + (1900 + notification.getDoneTime().getYear()));
+        date.setText("Date:"+notification.getDoneTime().getDate() + "/" + notification.getDoneTime().getMonth() + "/" + (1900 + notification.getDoneTime().getYear()));
     }
 }
 
@@ -184,11 +187,11 @@ class NotActionOthers extends RecyclerView.ViewHolder {
     }
 
     public void setOthers(Notification notification) {
-        techName.append(notification.getUwayikozeName());
-        serviceName.append("gufura");
+        techName.setText("name:"+notification.getUwayikozeName());
+        serviceName.setText("service:"+"gufura");
         umwanzuro.setText(Const.namesAction(notification.getActionId()));
         techImage.setImageResource(Const.serviceIdImag(notification.getActionId()));
-        date.append(notification.getDoneTime().getDate() + "/" + notification.getDoneTime().getMonth() + "/" + (1900 + notification.getDoneTime().getYear()));
+        date.setText("Date:"+notification.getDoneTime().getDate() + "/" + notification.getDoneTime().getMonth() + "/" + (1900 + notification.getDoneTime().getYear()));
     }
 
 }

@@ -1,105 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginBottom="8dp"
-    app:cardCornerRadius="20dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/relativeLayout"
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        android:background="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/item_tech_name"
-        app:layout_constraintStart_toEndOf="@+id/item_tech_name">
+        app:cardCornerRadius="20dp">
 
-        <ImageView
-            android:id="@+id/image_view_notification_action1"
-            android:layout_width="65dp"
-            android:layout_height="81dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_email_account"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/item_client_name_notification_action1"
-            android:layout_width="236dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="8dp"
-            android:text="name:"
-            app:layout_constraintLeft_toLeftOf="@id/image_view_notification_action1"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/item_date_notification_action1"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="11dp"
-            android:text="DATE:"
-            app:layout_constraintBottom_toTopOf="@+id/progressBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_view_notification_action1"
-            app:layout_constraintTop_toBottomOf="@+id/notification_app_description"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/notification_tech_accept"
-            android:layout_width="85dp"
-            android:layout_height="25dp"
+            android:layout_height="160dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginBottom="14dp"
-            android:gravity="center"
-            android:text="ACCEPT"
-            android:textColor="@color/design_default_color_primary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="@+id/item_tech_name"
+            app:layout_constraintStart_toEndOf="@+id/item_tech_name">
 
-        <TextView
-            android:id="@+id/notification_tech_cancel"
-            android:layout_width="95dp"
-            android:layout_height="31dp"
-            android:layout_marginStart="260dp"
-            android:gravity="center"
-            android:text="CANCEL"
-            android:textColor="@color/design_default_color_primary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.458"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.891" />
+            <ImageView
+                android:id="@+id/image_view_notification_action1"
+                android:layout_width="65dp"
+                android:layout_height="81dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_email_account"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/notification_app_description"
-            android:layout_width="261dp"
-            android:layout_height="35dp"
-            android:layout_marginLeft="76dp"
-            android:text="Description:"
-            android:textStyle="italic"
-            app:layout_constraintLeft_toLeftOf="@id/image_view_notification_action1"
-            app:layout_constraintTop_toBottomOf="@id/item_client_name_notification_action1" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_client_name_notification_action1"
+                android:layout_width="236dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="8dp"
+                android:text="name:"
+                app:layout_constraintLeft_toLeftOf="@id/image_view_notification_action1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_date_notification_action1"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="11dp"
+                android:text="DATE:"
+                app:layout_constraintBottom_toTopOf="@+id/progressBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_view_notification_action1"
+                app:layout_constraintTop_toBottomOf="@+id/notification_app_description"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/notification_tech_accept"
+                android:layout_width="85dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="14dp"
+                android:gravity="center"
+                android:text="ACCEPT"
+                android:textColor="@color/design_default_color_primary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/notification_tech_cancel"
+                android:layout_width="95dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="260dp"
+                android:gravity="center"
+                android:text="CANCEL"
+                android:textColor="@color/design_default_color_primary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.458"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.891" />
+
+            <TextView
+                android:id="@+id/notification_app_description"
+                android:layout_width="261dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="76dp"
+                android:text="Description:"
+                android:textStyle="italic"
+                app:layout_constraintLeft_toLeftOf="@id/image_view_notification_action1"
+                app:layout_constraintTop_toBottomOf="@id/item_client_name_notification_action1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>

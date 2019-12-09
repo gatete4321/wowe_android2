@@ -13,8 +13,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 
-public class CompletedViewModel extends AndroidViewModel
-{
+public class CompletedViewModel extends AndroidViewModel {
 
     AppoitementRespostory respostory;
     LiveData<List<Appoitement>> liveData;
@@ -22,19 +21,19 @@ public class CompletedViewModel extends AndroidViewModel
 
     public CompletedViewModel(@NonNull Application application) {
         super(application);
-        respostory=new AppoitementRespostory(application);
+        respostory = new AppoitementRespostory(application);
     }
 
-    public void deleteAppoitement(){
-
+    public void deleteAppoitement(Appoitement appoitement) {
+        respostory.deleteAppoitement(appoitement);
     }
 
-    public LiveData<List<Appoitement>> getLiveData(){
-        AppNotFilter filter=new AppNotFilter();
+    public LiveData<List<Appoitement>> getLiveData() {
+        AppNotFilter filter = new AppNotFilter();
         filter.setClientId(1);
         filter.setStatus(1);
 //        appoitements=respostory.getAppoitements(filter);
-        liveData= respostory.getAppoitements(filter);
+        liveData = respostory.getAppoitements(filter);
         return liveData;
     }
 }

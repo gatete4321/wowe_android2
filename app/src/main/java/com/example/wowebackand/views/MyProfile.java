@@ -69,11 +69,9 @@ public class MyProfile extends Fragment {
      */
     private void initializeData() {
         userName.setText(Const.userName);
-        Log.e("username",Const.userName+"");
-        email.setText(Const.email+"");
-        Log.e("email",Const.email+"");
+        email.setText(Const.email);
         phone.setText(Const.phone);
-        Log.e("phone",Const.phone+"");
+
     }
 
     /**
@@ -142,7 +140,7 @@ public class MyProfile extends Fragment {
         submit = dialog.findViewById(R.id.dialbox_phone_submit);
 
 
-        recentPhone.setText("07889867");//iyituraza gufata telephone yarihari maze tuyishyire hariya
+        recentPhone.setText(Const.phone);//iyituraza gufata telephone yarihari maze tuyishyire hariya
         cancel.setOnClickListener((view) -> {
             dialog.dismiss();
         });
@@ -175,7 +173,7 @@ public class MyProfile extends Fragment {
         recentImage.setImageResource(R.drawable.ic_email_account);
         newImage.setImageResource(R.drawable.ic_email_account);
 
-        recentThing.setText("dgatete4321@gmail.com");//nayo turaya pudatinga tuyivanye muri data
+        recentThing.setText(Const.email);//nayo turaya pudatinga tuyivanye muri data
 
         cancel.setOnClickListener((view) -> {
             dialog.dismiss();
@@ -210,7 +208,7 @@ public class MyProfile extends Fragment {
         recentImage.setImageResource(R.drawable.ic_username_account);
         newImage.setImageResource(R.drawable.ic_username_account);
 
-        recentThing.setText("dgatete432");//nayo turaya pudatinga tuyivanye muri data
+        recentThing.setText(Const.userName);//nayo turaya pudatinga tuyivanye muri data
 
         cancel.setOnClickListener((view) -> {
             dialog.dismiss();

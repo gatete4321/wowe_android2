@@ -112,15 +112,24 @@ public class AppoitementRespostory {
     }
 
     /**
-     *
+     *this is gona be used when appoitement canceled it is deleted online
      */
-    public void deleteAppoitement(Integer appoitementId) {
+    public void cancelAppoitement(Integer appoitementId) {
         AppNotFilter filter=new AppNotFilter();
         filter.setAppoitementId(appoitementId);
         Call<String> stringCall=appoitementNet.deleteAppoitement(filter);
         DoNet<String> net=new DoNet<>(null,null);
         stringCall.enqueue(net);
     }
+
+    /**
+     * this is used to delete appoitement in database
+     * @param appoitement
+     */
+    public void deleteAppoitement(Appoitement appoitement){
+        new DeleteAppoitement(dao).execute(appoitement);
+    }
+
 
     public void feedBack() {
 
@@ -157,6 +166,21 @@ public class AppoitementRespostory {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             lastId = integer;
+        }
+    }
+
+
+    private static class DeleteAppoitement extends AsyncTask<Appoitement,Void,Void>{
+        private AppoitementDao appoitementDao;
+
+        public DeleteAppoitement(AppoitementDao appoitementDao) {
+            this.appoitementDao = appoitementDao;
+        }
+
+        @Override
+        protected Void doInBackground(Appoitement... appoitements) {
+            appoitementDao.deleteAppoitement(appoitements[0]);
+            return null;
         }
     }
 
