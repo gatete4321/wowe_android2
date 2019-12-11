@@ -121,7 +121,7 @@ public class MakeAppoitement extends Fragment {
         AppoitementForm appoitement = new AppoitementForm();
 
         appoitement.setServiceId(client.getServiceId());
-        appoitement.setClientId(1);//"uyu muyuza tu uri kuyikoresha"
+        appoitement.setClientId(Const.userId);//"uyu muyuza tu uri kuyikoresha"
         appoitement.setTechId(client.getClientId());
         appoitement.setToday(new Date(calendarView.getDate()).getTime());
         appoitement.setDescription(description.getText().toString() + "@location" + location.getText().toString() + "@phone" + phone.getText().toString());

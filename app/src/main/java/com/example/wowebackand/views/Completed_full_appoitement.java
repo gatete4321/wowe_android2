@@ -18,14 +18,18 @@ import android.widget.Toast;
 import com.example.wowebackand.R;
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.constant.Const;
+import com.example.wowebackand.respostory.AppoitementRespostory;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 public class Completed_full_appoitement extends Fragment
 {
+    AppoitementRespostory respostory;
     Context context;
     Appoitement appoitement;
 
@@ -66,7 +70,13 @@ public class Completed_full_appoitement extends Fragment
 //            }
         });
         delete.setOnClickListener((view1)->{
-
+            if (isNetworkAvaible()) {
+                respostory = new AppoitementRespostory(null);
+                respostory.cancelAppoitement(appoitement.getAppoitementId());
+                Toast.makeText(getActivity(), "appoitement deleted on server", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(getActivity(),"enable to connect",Toast.LENGTH_SHORT).show();
         });
 
 
@@ -85,7 +95,7 @@ public class Completed_full_appoitement extends Fragment
             doneTime.append(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
             description.append(appoitement.getDescription());
             techName.append(appoitement.getTechName());
-            if (!isNetworkAvaible()){
+            if (isNetworkAvaible()){
                 initializeImages(appoitement.getClientId(),techPic);
             }
             else {
@@ -126,9 +136,37 @@ public class Completed_full_appoitement extends Fragment
                 .into(imageView);
     }
     private boolean isNetworkAvaible() {
-        ConnectivityManager connectivityManager=
-                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
-        return networkInfo!=null && networkInfo.isConnected();
+
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
+
+        return connected;
+
     }
 }
+
+//    public boolean checkConnection(){
+//        boolean connected = false;
+//        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+//        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+//                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+//            //we are connected to a network
+//            connected = true;
+//        }
+//        else
+//            connected = false;
+//
+//        return connected;
+//        //##########################33333later
+//        ConnectivityManager connectivityManager=
+//                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+//        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
+//        return networkInfo!=null && networkInfo.isConnected();
+//    }

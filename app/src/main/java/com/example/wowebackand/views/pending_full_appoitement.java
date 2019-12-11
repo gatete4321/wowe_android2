@@ -13,6 +13,7 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wowebackand.R;
 import com.example.wowebackand.models.Appoitement;
@@ -59,7 +60,9 @@ public class pending_full_appoitement extends Fragment
         delete.setOnClickListener((view1)->{
             respostory=new AppoitementRespostory(null);
             respostory.cancelAppoitement(appoitement.getAppoitementId());
+
             DefaultFragment.navController.navigate(R.id.pendingFragment);
+            Toast.makeText(getContext(),"appoitement canceld ",Toast.LENGTH_SHORT).show();
         });
 
 
@@ -107,9 +110,16 @@ public class pending_full_appoitement extends Fragment
                 .into(imageView);
     }
     private boolean isNetworkAvaible() {
-        ConnectivityManager connectivityManager=
-                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
-        return networkInfo!=null && networkInfo.isConnected();
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
+
+        return connected;
     }
 }
