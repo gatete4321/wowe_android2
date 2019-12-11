@@ -2,6 +2,8 @@ package com.example.wowebackand.views.recycles;
 
 
 import android.app.DatePickerDialog;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,18 +15,23 @@ import android.widget.Toast;
 
 import com.example.wowebackand.R;
 import com.example.wowebackand.models.Appoitement;
+import com.example.wowebackand.respostory.AppoitementRespostory;
 import com.example.wowebackand.viewModel.PendingViewModel;
 import com.example.wowebackand.views.adapter.PendingAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -41,6 +48,7 @@ public class DisplayFragPending extends Fragment {
 
     private DatePickerDialog.OnDateSetListener onDateSetListener;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -52,8 +60,10 @@ public class DisplayFragPending extends Fragment {
 
         PendingAdapter adapter = new PendingAdapter();
         viewModel.getLiveData().observe(this, appoitements -> {
-            if (appoitements!=null)
+            appoitementList=appoitements;
+            if (appoitements!=null) {
                 adapter.setAppoitements(appoitements);
+            }
             else
                 noData();
         });
@@ -72,6 +82,8 @@ public class DisplayFragPending extends Fragment {
                 Toast.makeText(getActivity(),"deleted",Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
+
+        viewModel.PendToComp(appoitementList);
         return view;
     }
 
@@ -93,6 +105,7 @@ public class DisplayFragPending extends Fragment {
 
     }
 }
+
 
 
 /**

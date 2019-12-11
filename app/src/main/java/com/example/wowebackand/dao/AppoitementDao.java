@@ -28,4 +28,10 @@ public interface AppoitementDao
     Integer getLastAppoitementId();
     @Query(" select last_insert_rowid()  from Appoitement last_insert_rowid ")
     Integer getLastAppoitement();
+
+    @Query("update Appoitement set status=2 where appoitementId=:id")//set status:sts where appoitementId:appid")
+    int updatePenToCom(Integer id);
+
+    @Query("update Appoitement set status=2 where appoitementId in(:appIds)")
+    int updatePenToCom(List<Integer> appIds);
 }

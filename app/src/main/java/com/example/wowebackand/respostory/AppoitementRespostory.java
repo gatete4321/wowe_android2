@@ -130,6 +130,9 @@ public class AppoitementRespostory {
         new DeleteAppoitement(dao).execute(appoitement);
     }
 
+    public void updatePendToComp(List<Integer> integers){
+        new UpdatePendiToCompl(dao).execute(integers);
+    }
 
     public void feedBack() {
 
@@ -180,6 +183,20 @@ public class AppoitementRespostory {
         @Override
         protected Void doInBackground(Appoitement... appoitements) {
             appoitementDao.deleteAppoitement(appoitements[0]);
+            return null;
+        }
+    }
+
+    private static class UpdatePendiToCompl extends AsyncTask<List<Integer>,Void,Void>{
+        private AppoitementDao dao;
+
+        public UpdatePendiToCompl(AppoitementDao dao) {
+            this.dao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(List<Integer>... lists) {
+            dao.updatePenToCom(lists[0]);
             return null;
         }
     }
