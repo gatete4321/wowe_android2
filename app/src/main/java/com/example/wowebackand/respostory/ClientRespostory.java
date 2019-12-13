@@ -52,12 +52,12 @@ public class ClientRespostory
 
     }
 
-    public Integer createClient(Client client){
-       Call<Integer> value=net.createClient(client);
-        DoNet<Integer> doNet=new DoNet<>();
-        value.enqueue(doNet);
-        return doNet.getLiveData().getValue();
-    }
+//    public Integer createClient(Client client){
+//       Call<Integer> value=net.createClient(client);
+//        DoNet<Integer> doNet=new DoNet<>();
+//        value.enqueue(doNet);
+//        return doNet.getLiveData().getValue();
+//    }
 
     public void deleteClient(){
 

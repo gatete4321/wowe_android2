@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,16 +62,15 @@ public class DisplayFragPending extends Fragment {
 
         PendingAdapter adapter = new PendingAdapter();
         viewModel.getLiveData().observe(this, appoitements -> {
-            appoitementList=appoitements;
-            if (appoitements!=null) {
+            appoitementList = appoitements;
+            if (appoitements != null) {
                 adapter.setAppoitements(appoitements);
-            }
-            else
+            } else
                 noData();
         });
 
         recyclerView.setAdapter(adapter);
-        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT){
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -79,11 +80,16 @@ public class DisplayFragPending extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 viewModel.deleteAppoitement(adapter.getAppoitementByPos(viewHolder.getAdapterPosition()));
-                Toast.makeText(getActivity(),"deleted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
+        new Handler().postDelayed(()->{
+            if (appoitementList != null){
+                viewModel.PendToComp(appoitementList);
+                Log.e("PendToComp","nabikoze");
+            }
+        },3000);
 
-        viewModel.PendToComp(appoitementList);
         return view;
     }
 
@@ -105,7 +111,6 @@ public class DisplayFragPending extends Fragment {
 
     }
 }
-
 
 
 /**

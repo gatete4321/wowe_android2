@@ -3,6 +3,8 @@ package com.example.wowebackand.views;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,6 +69,11 @@ public class LogIn extends Fragment {
         signIn.setOnClickListener((view1) -> {
             uName = userName.getText().toString();
             pwd = password.getText().toString();
+            if (!isNetworkAvaible()){
+//                Toast.makeText(getContext(),"notConneted",Toast.LENGTH_SHORT).show();
+                makeToast("notConneted");
+                return;
+            }
             if (checkString(uName, pwd)) {
 //
 //                if (uName.equals("didox") && pwd.equals("wowe")) {
@@ -97,12 +104,14 @@ public class LogIn extends Fragment {
                     startActivity(intent);
                 }
                 else {
-                    Toast.makeText(getContext(), "the user does not exist", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(), "the user does not exist", Toast.LENGTH_SHORT).show();
+                    makeToast("the user does not exist");
                 }
 
             }
             else{
-                Toast.makeText(getContext(), "fill the fields", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "fill the fields", Toast.LENGTH_SHORT).show();
+                makeToast("fill the fields");
             }
         });
 
@@ -173,4 +182,22 @@ public class LogIn extends Fragment {
         return clientForm;
     }
 
+    private boolean isNetworkAvaible() {
+
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
+
+        return connected;
+
+    }
+    public void makeToast(String msg){
+        Toast.makeText(getContext(),msg,Toast.LENGTH_SHORT).show();
+    }
 }

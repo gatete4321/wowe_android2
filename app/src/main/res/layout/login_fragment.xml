@@ -76,13 +76,18 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <ProgressBar
+            android:id="@+id/probar"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="16dp"
             android:background="#0f1682"
             android:text="Sign In" />

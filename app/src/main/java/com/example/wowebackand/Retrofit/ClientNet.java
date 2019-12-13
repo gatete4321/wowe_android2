@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 
 public interface ClientNet
 {
-    @POST("/create")
+    @POST("public/client/create")
     Call<Integer> createClient(@Body Client client);
 
     @POST("/delete")
