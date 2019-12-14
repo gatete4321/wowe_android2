@@ -6,12 +6,14 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +27,15 @@ import com.example.wowebackand.models.ClientForm;
 import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.models.filters.ClientFilter;
 import com.example.wowebackand.respostory.ClientRespostory;
+import com.example.wowebackand.viewModel.LoginViewModel;
 import com.example.wowebackand.viewModel.MainViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
+import java.util.Observable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,12 +47,15 @@ public class LogIn extends Fragment {
     SharedPreferences preferences;
     Intent intent;
 
+    LoginViewModel loginViewModel;
+
+
 
     EditText userName, password;
     Button signIn;
     TextView forget, create;
     ClientForm clientForm;
-
+    ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -57,6 +66,9 @@ public class LogIn extends Fragment {
         signIn = view.findViewById(R.id.login);
         forget = view.findViewById(R.id.login_forget_password);
         create = view.findViewById(R.id.login_registration);
+        progressBar=view.findViewById(R.id.probar);
+
+        loginViewModel= ViewModelProviders.of(this).get(LoginViewModel.class);
 
         preferences = getActivity().getSharedPreferences("userDetails", Context.MODE_PRIVATE);
 
@@ -74,7 +86,12 @@ public class LogIn extends Fragment {
                 makeToast("notConneted");
                 return;
             }
-            if (checkString(uName, pwd)) {
+            if (!checkString(uName, pwd)){
+//                Toast.makeText(getContext(), "fill the fields", Toast.LENGTH_SHORT).show();
+                makeToast("fill the fields");
+            }
+             else {
+                progressBar.setVisibility(View.VISIBLE);
 //
 //                if (uName.equals("didox") && pwd.equals("wowe")) {
 //                    SharedPreferences.Editor editor = preferences.edit();
@@ -84,35 +101,40 @@ public class LogIn extends Fragment {
 //                    startActivity(intent);
 //                }
 
-
-
-                ClientForm client=clientExist(userName.getText().toString(),password.getText().toString());
-                if (client!=null){
-                    /**
-                     * ndaza gukoresha iriya clientId nkoresheje MainViewModel.class
-                     * maze nkurure completed,pending appoitements hamwe
-                     */
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString("token",client.getToken());
-                    editor.putString("userName",uName);
-                    editor.putString("phone", client.getPhoneNumber());
-                    editor.putString("email",client.getEmail());
-                    editor.putInt("clientId",client.getClientId());
-                    editor.commit();
+                ClientFilter filter = new ClientFilter();
+                filter.setUsername(uName);
+                filter.setPassword(pwd);
+                loginViewModel.login(filter).observe(this,(client)->{
+                    if (client!=null){
+                        /**
+                         * ndaza gukoresha iriya clientId nkoresheje MainViewModel.class
+                         * maze nkurure completed,pending appoitements hamwe
+                         */
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("token",client.getToken());
+                        editor.putString("userName",uName);
+                        editor.putString("phone", client.getPhoneNumber());
+                        editor.putString("email",client.getEmail());
+                        editor.putInt("clientId",client.getClientId());
+                        editor.commit();
+                        progressBar.setVisibility(View.GONE);
 //                    MainViewModel.setClientId(client.getClientId());
 //                    MainActivity.navController.navigate(R.id.defaultFragment);
-                    startActivity(intent);
-                }
-                else {
-//                    Toast.makeText(getContext(), "the user does not exist", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    }
+//                    else {
+////                    Toast.makeText(getContext(), "the user does not exist", Toast.LENGTH_SHORT).show();
+//                        progressBar.setVisibility(View.GONE);
+//                        makeToast("the user does not exist");
+//                    }
+                });
+                new Handler().postDelayed(()->{
+                    progressBar.setVisibility(View.GONE);
                     makeToast("the user does not exist");
-                }
+//                        return;
+                },5000);
+            }
 
-            }
-            else{
-//                Toast.makeText(getContext(), "fill the fields", Toast.LENGTH_SHORT).show();
-                makeToast("fill the fields");
-            }
         });
 
         create.setOnClickListener((view1) -> {
@@ -144,43 +166,45 @@ public class LogIn extends Fragment {
         return check;
     }
 
-    public ClientForm clientExist(String username, String password) {
-//        respostory=new ClientRespostory();
-        ClientFilter filter = new ClientFilter();
-        filter.setUsername(username);
-        filter.setPassword(password);
-        ClientForm client=login(filter);
+//    public ClientForm clientExist(String username, String password) {
+////        respostory=new ClientRespostory();
+//        ClientFilter filter = new ClientFilter();
+//        filter.setUsername(username);
+//        filter.setPassword(password);
+//        ClientForm client=login(filter);
+//
+//        return client;
+//
+//    }
 
-        return client;
 
-    }
-
-
-    public ClientForm login(ClientFilter filter){
-        net= RetrofitService.createService(ClientNet.class);
-        Call<ClientForm> call;
-
-        call=net.getClient(filter);
-
-        call.enqueue(new Callback<ClientForm>() {
-
-            @Override
-            public void onResponse(Call<ClientForm> call, Response<ClientForm> response) {
-                clientForm=response.body();
-                Log.e("onResponse","muri response");
-                return;
-            }
-
-            @Override
-            public void onFailure(Call<ClientForm> call, Throwable t) {
-                Log.e("login","kubera"+t.getMessage());
-//                Toast.makeText()`
-                return;
-            }
-        });
-        Log.e("main","muri main Thread");
-        return clientForm;
-    }
+//    public ClientForm login(ClientFilter filter){
+//        net= RetrofitService.createService(ClientNet.class);
+//        Call<ClientForm> call;
+//
+//        call=net.getClient(filter);
+//
+//        call.enqueue(new Callback<ClientForm>() {
+//
+//            @Override
+//            public void onResponse(Call<ClientForm> call, Response<ClientForm> response) {
+//                clientForm=response.body();
+////                progressBar.setVisibility(View.GONE);
+//                Log.e("onResponse","muri response");
+//                return;
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ClientForm> call, Throwable t) {
+////                progressBar.setVisibility(View.GONE);
+//                Log.e("login","kubera"+t.getCause().getMessage());
+////                Toast.makeText()`
+//                return;
+//            }
+//        });
+//        Log.e("main","muri main Thread");
+//        return clientForm;
+//    }
 
     private boolean isNetworkAvaible() {
 

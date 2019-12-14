@@ -1,6 +1,7 @@
 package com.example.wowebackand.views.recycles;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,8 +51,67 @@ public class DisplayFragService extends Fragment {
              */ MainActivity.navController.navigate(R.id.serviceProvider,new Bundle());
         }),getActivity());
         recyclerView.setAdapter(adapterService);
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),calculateNumberOfColumns(2));
+        recyclerView.setLayoutManager(gridLayoutManager);//new GridLayoutManager(getActivity(),2));
     return view;
+    }
+
+    // Custom method to calculate number of columns for grid type recycler view
+    protected int calculateNumberOfColumns(int base){
+        int columns = base;
+        String screenSize = getScreenSizeCategory();
+
+        if(screenSize.equals("small")){
+            if(base!=1){
+                columns = columns-1;
+            }
+        }else if (screenSize.equals("normal")){
+            // Do nothing
+        }else if(screenSize.equals("large")){
+            columns += 2;
+        }else if (screenSize.equals("xlarge")){
+            columns += 3;
+        }
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            columns = (int) (columns * 1.5);
+        }
+
+        return columns;
+    }
+
+
+    protected String getScreenOrientation(){
+        String orientation = "undefined";
+
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+            orientation = "landscape";
+        }else if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+            orientation = "portrait";
+        }
+
+        return orientation;
+    }
+
+    protected String getScreenSizeCategory(){
+        int screenLayout = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
+
+        switch(screenLayout){
+            case Configuration.SCREENLAYOUT_SIZE_SMALL:
+                // small screens are at least 426dp x 320dp
+                return "small";
+            case Configuration.SCREENLAYOUT_SIZE_NORMAL:
+                // normal screens are at least 470dp x 320dp
+                return "normal";
+            case Configuration.SCREENLAYOUT_SIZE_LARGE:
+                // large screens are at least 640dp x 480dp
+                return "large";
+            case Configuration.SCREENLAYOUT_SIZE_XLARGE:
+                // xlarge screens are at least 960dp x 720dp
+                return "xlarge";
+            default:
+                return "undefined";
+        }
     }
 }
 //((ViewGroup)getView().getParent()).getId()
