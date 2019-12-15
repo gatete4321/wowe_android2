@@ -132,7 +132,7 @@ public class LogIn extends Fragment {
                     progressBar.setVisibility(View.GONE);
                     makeToast("the user does not exist");
 //                        return;
-                },5000);
+                },10000);
             }
 
         });

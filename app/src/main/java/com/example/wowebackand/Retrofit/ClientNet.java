@@ -20,11 +20,11 @@ public interface ClientNet
     Call<String> deleteClient(@Body ClientFilter filter);
 
 
-    @POST("public/client/updateinfo")
+    @POST("/client/updateinfo")
     Call<Integer> updateClient(@Body ClientFilter filter);
 
 
-    @POST("public/client/login")
+    @POST("/client/login")
     Call<ClientForm> getClient(@Body ClientFilter filter);
 
     /**
@@ -32,10 +32,10 @@ public interface ClientNet
      * @param filter
      * @return
      */
-    @POST("public/client/all")
+    @POST("/client/all")
     Call<List<Client>> getListTech(@Body ClientFilter filter);
 
-    @POST("public/client/password")
+    @POST("/client/password")
     Call<Integer> updatePassword(@Body ClientFilter filter);
 
 

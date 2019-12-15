@@ -14,13 +14,13 @@ import retrofit2.http.POST;
 
 public interface NotificationNet
 {
-    @POST("/public/notification/all")
+    @POST("/notification/all")
     public Call<List<Notification>> getNotifications(@Body AppNotFilter filter);
 
-    @POST("/public/notification/create")
+    @POST("/notification/create")
     public Call<Integer> createNotification(@Body NotificationForm notificationForm);
 
-    @POST("/public/notification/delete")
+    @POST("/notification/delete")
     public Call<Integer> deleteNotification(@Body Notification filter);
 
 }

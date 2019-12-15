@@ -2,30 +2,35 @@ package com.example.wowebackand.Retrofit;
 
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.AppoitementForm;
+import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.models.filters.AppNotFilter;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
 public interface AppoitementNet
 {
-    @POST("public/app/appoitement")
+
+    @POST("/app/appoitement")
     Call<Appoitement> getAppoitement(@Body AppNotFilter filter);
 
-    @POST("/public/app/all")
+//    @Headers("Authorization"+ Const.)
+    @POST("/app/all")
     Call<List<Appoitement>> getAllAppoitements(@Body AppNotFilter filter);
 
 //    Call<List<Appoitement>> getCompletedAppoitements(Integer clientId);
 //
 //    Call<List<Appoitement>> getPendingAppoitements(Integer clientId);
 
-    @POST("public/app/create")
+    @POST("/app/create")
     Call<Integer> createAppoitement(@Body AppoitementForm appoitementForm);
 
-    @POST("public/app/delete")
+    @POST("/app/delete")
     Call<String> deleteAppoitement(@Body AppNotFilter filter);
 
 
@@ -36,3 +41,4 @@ public interface AppoitementNet
     @POST()
     Call<Appoitement> updateAppoitent(@Body Appoitement appoitement);
 }
+//    @Header("Authorization") String header,

@@ -12,6 +12,7 @@ import com.example.wowebackand.dao.AppoitementDao;
 import com.example.wowebackand.dao.WoweDatabase;
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.AppoitementForm;
+import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.models.filters.AppNotFilter;
 
 import java.util.List;
@@ -105,6 +106,7 @@ public class AppoitementRespostory {
     public static void insertDataInDatabase(AppNotFilter filter, AppoitementDao dao, AppoitementNet appoitementNet) {
         i++;
         if (i <= 1) {
+//            String token= "Bearer "+Const.token;
             Call<List<Appoitement>> listCall = appoitementNet.getAllAppoitements(filter);
             DoNet<List<Appoitement>> net = new DoNet(dao,null);
             listCall.enqueue(net);
