@@ -26,12 +26,14 @@ public class Notification
 
     private String uwayikozeName;
 
+    private String description;
+
 
     @Ignore
     public Notification() {
     }
 
-    public Notification(Integer notficationId, Integer appoitementId, Integer status, Integer actionId, Date doneTime, Integer uwayikozeId, Integer uyikoreweId, String uwayikozeName) {
+    public Notification(Integer notficationId, Integer appoitementId, Integer status, Integer actionId, Date doneTime, Integer uwayikozeId, Integer uyikoreweId, String uwayikozeName, String description) {
         this.notficationId = notficationId;
         this.appoitementId = appoitementId;
         this.status = status;
@@ -40,6 +42,7 @@ public class Notification
         this.uwayikozeId = uwayikozeId;
         this.uyikoreweId = uyikoreweId;
         this.uwayikozeName = uwayikozeName;
+        this.description = description;
     }
 
     public Integer getNotficationId() {
@@ -106,4 +109,11 @@ public class Notification
         this.uwayikozeName = uwayikozeName;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
