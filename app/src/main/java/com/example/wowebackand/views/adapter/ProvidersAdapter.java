@@ -1,6 +1,8 @@
 package com.example.wowebackand.views.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,19 +64,12 @@ public class ProvidersAdapter extends RecyclerView.Adapter<ProvidersAdapter.MyPr
 
             holder.makeApp.setOnClickListener((view) -> {
                 MainActivity.navController.navigate(R.id.makeAppoitement, bundle);
-//            Toast.makeText(context,"make appoitement",Toast.LENGTH_SHORT).show();
-                /**
-                 * hano nima clika ngomba kujya kuri make appoitementFragment
-                 */
             });
 
 
             holder.calling.setOnClickListener((view) -> {
-
-                Toast.makeText(context, "call", Toast.LENGTH_SHORT).show();
-                /**
-                 * hano na ha click azahita ahamagara kandi ngomba kubika inshuro yahamagay
-                 */
+                Intent intent=new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+client.getPhoneNumber()));
+                context.startActivity(intent);
             });
             holder.view.setOnClickListener((view) -> {
 

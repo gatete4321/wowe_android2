@@ -182,6 +182,7 @@ public class MainActivity extends AppCompatActivity implements
         Const.email = sharedPreferences.getString("email", "email");
         Const.userId = sharedPreferences.getInt("clientId", 0);
         Const.userName = sharedPreferences.getString("userName", "user");
+        Const.phone=sharedPreferences.getString("phone","0785336934");
         Log.e("mainActivity","initializing shared preference");
 //    Const.userId=editor.
 

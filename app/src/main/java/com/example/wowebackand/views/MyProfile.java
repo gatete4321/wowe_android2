@@ -26,7 +26,7 @@ public class MyProfile extends Fragment {
 
     Dialog dialog;
 
-    ImageView accountImage, addImage;
+    ImageView accountImage;
 
     TextView email, userName, phone, password;
 
@@ -79,7 +79,6 @@ public class MyProfile extends Fragment {
      */
     private void initializeViews(View view) {
         accountImage = view.findViewById(R.id.account_image);
-        addImage = view.findViewById(R.id.account_add_image);
         email = view.findViewById(R.id.account_email);
         userName = view.findViewById(R.id.account_username);
         phone = view.findViewById(R.id.account_phone);
@@ -116,10 +115,10 @@ public class MyProfile extends Fragment {
             }
 
             if (updatePassword(password1.getText().toString(), recentPassword.getText().toString())) {
-                ClientRespostory.check=false;
+                ClientRespostory.check = false;
                 dialog.dismiss();
             }
-                Toast.makeText(getContext(), "recent password does not exist", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "recent password does not exist", Toast.LENGTH_SHORT).show();
         });
         dialog.show();
     }
@@ -149,7 +148,7 @@ public class MyProfile extends Fragment {
                 Toast.makeText(getContext(), "please fill real data", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (updateClientInfo(newPhone.getText().toString(),2)){
+            if (updateClientInfo(newPhone.getText().toString(), 2)) {
                 dialog.dismiss();
             }
         });
@@ -183,8 +182,8 @@ public class MyProfile extends Fragment {
                 Toast.makeText(getContext(), "please fill real data", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (updateClientInfo(newThing.getText().toString(),3)){
-             dialog.dismiss();
+            if (updateClientInfo(newThing.getText().toString(), 3)) {
+                dialog.dismiss();
             }
         });
 
@@ -218,13 +217,12 @@ public class MyProfile extends Fragment {
                 Toast.makeText(getContext(), "please fill real data", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (updateClientInfo(newThing.getText().toString(),1)){
+            if (updateClientInfo(newThing.getText().toString(), 1)) {
                 dialog.dismiss();
             }
         });
         dialog.show();
     }
-
 
 
     /**
@@ -242,7 +240,7 @@ public class MyProfile extends Fragment {
         filter.setPassword(password);
 
         respostory = new ClientRespostory();
-        check=respostory.updateDatas(filter,1);
+        check = respostory.updateDatas(filter, 1);
         return check;
     }
 
@@ -250,7 +248,7 @@ public class MyProfile extends Fragment {
         boolean check = false;
 
         ClientFilter filter = new ClientFilter();
-        switch (ops){
+        switch (ops) {
             case 1:
                 filter.setUsername(data);
                 break;
@@ -262,8 +260,8 @@ public class MyProfile extends Fragment {
         }
 
         respostory = new ClientRespostory();
-        check=respostory.updateDatas(filter,2);
-        ClientRespostory.check=false;
+        check = respostory.updateDatas(filter, 2);
+        ClientRespostory.check = false;
         return check;
     }
 

@@ -4,12 +4,14 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,11 +20,14 @@ import com.example.wowebackand.Retrofit.ClientNet;
 import com.example.wowebackand.Retrofit.RetrofitService;
 import com.example.wowebackand.activities.SecActivity;
 import com.example.wowebackand.models.Client;
+import com.example.wowebackand.models.ClientForm;
+import com.example.wowebackand.viewModel.LoginViewModel;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,12 +38,16 @@ public class Register extends Fragment {
     Context context;
 
     Integer value;
+    LoginViewModel viewModel;
+
 
     ClientNet net;
     EditText userName, password1, password2, phone, email;
     Button register,signIn;
+    ProgressBar proBarReg;
 
     Client client;
+    String username,password,emailS,phoneNumber;
 
     @Nullable
     @Override
@@ -52,6 +61,9 @@ public class Register extends Fragment {
         email = view.findViewById(R.id.register_email);
         register = view.findViewById(R.id.register);
         signIn=view.findViewById(R.id.register_signin);
+        proBarReg=view.findViewById(R.id.probar_register);
+
+        viewModel= ViewModelProviders.of(this).get(LoginViewModel.class);
 
         register.setOnClickListener((view1)->{
             if (checkSpaces()){
@@ -62,30 +74,51 @@ public class Register extends Fragment {
                makeToast("password not match");
                 return;
             }
-//            if (checkUsernameHastaken(userName.getText().toString())){
-//                Toast.makeText(getActivity(),"username has taken",Toast.LENGTH_SHORT).show();
-//            }
-            if (isNetworkAvaible()) {
-                if (createClient() != null) {
+            password=password1.getText().toString();
 
-                    switch (value) {
-                        case 20:
-                            makeToast("the username has taken");
-                            return;
-                        case 10:
-                            makeToast("try later");
-                            return;
-                        case 1:
-                            makeToast("done");
-                            SecActivity.controller.navigate(R.id.loginFragment);
-                            return;
-                    }
+            username=userName.getText().toString();
+            emailS=email.getText().toString();
+            phoneNumber=phone.getText().toString();
 
-                }
+            if (!isNetworkAvaible()) {
+                makeToast("not connected");
+                return;
             }
             else
-                makeToast("not connected");
-//            MainActivity.navController.navigate(R.id.loginFragment);
+            {
+                proBarReg.setVisibility(View.VISIBLE);
+                ClientForm form=new ClientForm();
+                form.setEmail(emailS);
+                form.setPhoneNumber(phoneNumber);
+                form.setUsername(username);
+                form.setPassword(password);
+                viewModel.register(form).observe(this,value->{
+                    if (value!=null){
+                        switch (value) {
+                            case 100:
+                                makeToast("the username has taken");
+                                proBarReg.setVisibility(View.GONE);
+                                return;
+                            case 0:
+                                makeToast("try later");
+                                return;
+                            case 1:
+                                makeToast("done");
+                                proBarReg.setVisibility(View.GONE);
+                                SecActivity.controller.navigate(R.id.loginFragment);
+                                return;
+                        }
+                    }
+                });
+                new Handler().postDelayed(()->{
+                    if (proBarReg.getVisibility()==View.VISIBLE){
+                    proBarReg.setVisibility(View.GONE);
+                    makeToast("network fails");
+                    }
+                },10000);
+
+
+            }
 
 
         });
@@ -97,48 +130,15 @@ public class Register extends Fragment {
         return view;
     }
 
-    public Integer createClient() {
-        net= RetrofitService.createService(ClientNet.class);
-        client = new Client();
-        client.setUsername(userName.getText().toString());
-        client.setPassword(password1.getText().toString());
-        client.setEmail(email.getText().toString());
-        client.setPhoneNumber(phone.getText().toString());
-
-        Call<Integer> call=net.createClient(client);
-
-        call.enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                if (!response.isSuccessful()) {
-                    Log.e("unsucesfull", "code error:" + response.code());
-                    return;
-                }
-                value=response.body();
-                return;
-            }
-
-            @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
-               makeToast("failure"+t.getMessage());
-            }
-        });
-
-
-        /**
-         * hano code za retrofit zo gusubmitinga
-         */
-
-        return null;
-    }
 
     boolean checkSpaces() {
         boolean value = false;
-        if (!(password1.getText().toString().trim().isEmpty()
-                && password2.getText().toString().trim().isEmpty()
-                && userName.getText().toString().trim().isEmpty())
-                && email.getText().toString().trim().isEmpty()
-                && phone.getText().toString().trim().isEmpty()) {
+        if (password1.getText().toString().trim().isEmpty()
+                || password2.getText().toString().trim().isEmpty()
+                || userName.getText().toString().trim().isEmpty()
+                || email.getText().toString().trim().isEmpty()
+                || phone.getText().toString().trim().isEmpty()) {
+
             value = true;
             /**
              * for future i will put even email for erecovery password

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.wowebackand.Retrofit.ClientNet;
 import com.example.wowebackand.Retrofit.RetrofitService;
+import com.example.wowebackand.models.Client;
 import com.example.wowebackand.models.ClientForm;
 import com.example.wowebackand.models.filters.ClientFilter;
 
@@ -19,14 +20,15 @@ public class LoginViewModel extends ViewModel
 {
     ClientNet net;
     MutableLiveData<ClientForm> mutableLiveData;
+    MutableLiveData<Integer> integerMutableLiveData;
 
     public LoginViewModel() {
-
+        net= RetrofitService.createService(ClientNet.class);
     }
 
     public MutableLiveData<ClientForm> login(ClientFilter filter){
         mutableLiveData=new MutableLiveData<>();
-        net= RetrofitService.createService(ClientNet.class);
+
         Call<ClientForm> call;
 
         call=net.getClient(filter);
@@ -56,6 +58,35 @@ public class LoginViewModel extends ViewModel
         });
         Log.e("main","muri main Thread");
         return mutableLiveData;
+    }
+
+    public MutableLiveData<Integer> register(ClientForm form){
+        integerMutableLiveData=new MutableLiveData<>();
+       Client client = new Client();
+        client.setUsername(form.getUsername());
+        client.setPassword(form.getPassword());
+        client.setEmail(form.getEmail());
+        client.setPhoneNumber(form.getPhoneNumber());
+
+        Call<Integer> call=net.createClient(client);
+
+        call.enqueue(new Callback<Integer>() {
+            @Override
+            public void onResponse(Call<Integer> call, Response<Integer> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("unsucesfull", "code error:" + response.code());
+                    return;
+                }
+                integerMutableLiveData.postValue(response.body());
+                return;
+            }
+
+            @Override
+            public void onFailure(Call<Integer> call, Throwable t) {
+                integerMutableLiveData.postValue(90);
+            }
+        });
+        return integerMutableLiveData;
     }
 
 }

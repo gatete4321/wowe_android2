@@ -43,7 +43,8 @@ public class RetrofitService
 
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:9000")
+                .baseUrl("https://wowe3.cfapps.io")
+//                .baseUrl("http://10.0.2.2:9000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

@@ -53,6 +53,8 @@ public class DisplayServiceProvider extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_frag_service_provider, container, false);
 
+        recyclerView=view.findViewById(R.id.service_provider);
+
         Bundle bundle = getArguments();
         if (bundle != null) {
             Log.e("service", "bundle is not null");
@@ -61,51 +63,48 @@ public class DisplayServiceProvider extends Fragment {
         }
 
 
-        shimmerFrameLayout = view.findViewById(R.id.shimmer_layout);
-        recyclerView = view.findViewById(R.id.service_provider);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        viewModel = ViewModelProviders.of(getActivity()).get(ProvideViewModel.class);
 
 
-        viewModel.getListClientLivedata(serviceId).observe(this, client -> {
-            clientList = client;
-        });
-        adapter = new ProvidersAdapter(getActivity().getApplicationContext());
-
-        recyclerView.setAdapter(adapter);
-
-        new Handler().postDelayed(() -> {
-            if (clientList != null) {
-                adapter.setTechnicians(clientList);
-                adapter.showShimer = false;
-                adapter.notifyDataSetChanged();
-            }
-            else {
-                noData();
-            }
-        }, 3000);
 
 
-        if (!isNetworkAvaible()){
-            Toast.makeText(getContext(),"network irahari",Toast.LENGTH_SHORT).show();
+        if (!isNetworkAvaible()) {
+            noData("turn on Connection");
+        } else {
+            shimmerFrameLayout = view.findViewById(R.id.shimmer_layout);
+
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            viewModel = ViewModelProviders.of(getActivity()).get(ProvideViewModel.class);
+            viewModel.getListClientLivedata(serviceId).observe(this, client -> {
+                clientList = client;
+            });
+            adapter = new ProvidersAdapter(getActivity().getApplicationContext());
+
+            recyclerView.setAdapter(adapter);
+
+            new Handler().postDelayed(() -> {
+                if (clientList != null) {
+                    adapter.setTechnicians(clientList);
+                    adapter.showShimer = false;
+                    adapter.notifyDataSetChanged();
+                } else {
+                    noData("Oops");
+                }
+            }, 3000);
+
         }
-        else
-            Toast.makeText(getContext(),"network nayihari",Toast.LENGTH_SHORT).show();
 
 
         return view;
     }
 
 
-
-
-    void noData(){
+    void noData(String message) {
         recyclerView.setVisibility(View.GONE);
 
-        recyclerView=null;
+        recyclerView = null;
         TextView textview = new TextView(getActivity());
-        textview.setText("Oops!!");
+        textview.setText(message);
         textview.setTextSize(40);
         textview.setGravity(View.TEXT_ALIGNMENT_CENTER);
 
@@ -113,14 +112,23 @@ public class DisplayServiceProvider extends Fragment {
         textviewparam.addRule(RelativeLayout.CENTER_HORIZONTAL);
         textviewparam.addRule(RelativeLayout.CENTER_VERTICAL);
 
-        RelativeLayout relativeLayout=view.findViewById(R.id.layout_frag_service_provider);
+        RelativeLayout relativeLayout = view.findViewById(R.id.layout_frag_service_provider);
         relativeLayout.addView(textview, textviewparam);
 
     }
+
     private boolean isNetworkAvaible() {
-        ConnectivityManager connectivityManager=
-                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo=connectivityManager.getActiveNetworkInfo();
-    return networkInfo!=null && networkInfo.isConnected();
+
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        } else
+            connected = false;
+
+        return connected;
+
     }
 }

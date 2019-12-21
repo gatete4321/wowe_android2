@@ -73,33 +73,18 @@ public class LogIn extends Fragment {
         preferences = getActivity().getSharedPreferences("userDetails", Context.MODE_PRIVATE);
 
         intent = new Intent(getActivity(), MainActivity.class);
-
-//        if (preferences.contains("userName") && preferences.contains("password")) {
-//            startActivity(intent);
-//        }
-
         signIn.setOnClickListener((view1) -> {
             uName = userName.getText().toString();
             pwd = password.getText().toString();
             if (!isNetworkAvaible()){
-//                Toast.makeText(getContext(),"notConneted",Toast.LENGTH_SHORT).show();
                 makeToast("notConneted");
                 return;
             }
             if (!checkString(uName, pwd)){
-//                Toast.makeText(getContext(), "fill the fields", Toast.LENGTH_SHORT).show();
                 makeToast("fill the fields");
             }
              else {
                 progressBar.setVisibility(View.VISIBLE);
-//
-//                if (uName.equals("didox") && pwd.equals("wowe")) {
-//                    SharedPreferences.Editor editor = preferences.edit();
-//                    editor.putString("userName", uName);
-//                    editor.putString("password", pwd);
-//                    editor.commit();
-//                    startActivity(intent);
-//                }
 
                 ClientFilter filter = new ClientFilter();
                 filter.setUsername(uName);
@@ -122,11 +107,7 @@ public class LogIn extends Fragment {
 //                    MainActivity.navController.navigate(R.id.defaultFragment);
                         startActivity(intent);
                     }
-//                    else {
-////                    Toast.makeText(getContext(), "the user does not exist", Toast.LENGTH_SHORT).show();
-//                        progressBar.setVisibility(View.GONE);
-//                        makeToast("the user does not exist");
-//                    }
+
                 });
                 new Handler().postDelayed(()->{
                     progressBar.setVisibility(View.GONE);
@@ -166,45 +147,6 @@ public class LogIn extends Fragment {
         return check;
     }
 
-//    public ClientForm clientExist(String username, String password) {
-////        respostory=new ClientRespostory();
-//        ClientFilter filter = new ClientFilter();
-//        filter.setUsername(username);
-//        filter.setPassword(password);
-//        ClientForm client=login(filter);
-//
-//        return client;
-//
-//    }
-
-
-//    public ClientForm login(ClientFilter filter){
-//        net= RetrofitService.createService(ClientNet.class);
-//        Call<ClientForm> call;
-//
-//        call=net.getClient(filter);
-//
-//        call.enqueue(new Callback<ClientForm>() {
-//
-//            @Override
-//            public void onResponse(Call<ClientForm> call, Response<ClientForm> response) {
-//                clientForm=response.body();
-////                progressBar.setVisibility(View.GONE);
-//                Log.e("onResponse","muri response");
-//                return;
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ClientForm> call, Throwable t) {
-////                progressBar.setVisibility(View.GONE);
-//                Log.e("login","kubera"+t.getCause().getMessage());
-////                Toast.makeText()`
-//                return;
-//            }
-//        });
-//        Log.e("main","muri main Thread");
-//        return clientForm;
-//    }
 
     private boolean isNetworkAvaible() {
 

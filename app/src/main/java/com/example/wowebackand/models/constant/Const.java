@@ -20,7 +20,7 @@ public  class Const
     public static String phone;
 
 
-    public static final String url="http://10.0.2.2:9000";
+    public static final String url="https://wowe3.cfapps.io";//"http://10.0.2.2:9000";
 
     public static final String urlImage="http://10.0.2.2:9000/public/pic/download?filename=";
     public static final String urlImageId="http://10.0.2.2:9000/public/pic/downloadId?id=";

@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 
 public interface ClientNet
 {
-    @POST("public/client/create")
+    @POST("/public/twese/register")
     Call<Integer> createClient(@Body Client client);
 
     @POST("/delete")
@@ -24,7 +24,7 @@ public interface ClientNet
     Call<Integer> updateClient(@Body ClientFilter filter);
 
 
-    @POST("/client/login")
+    @POST("/public/twese/login")
     Call<ClientForm> getClient(@Body ClientFilter filter);
 
     /**
@@ -32,10 +32,10 @@ public interface ClientNet
      * @param filter
      * @return
      */
-    @POST("/client/all")
+    @POST("/clients/all")
     Call<List<Client>> getListTech(@Body ClientFilter filter);
 
-    @POST("/client/password")
+    @POST("/clients/password")
     Call<Integer> updatePassword(@Body ClientFilter filter);
 
 

@@ -6,24 +6,19 @@
     app:startDestination="@id/defaultFragment">
 
     <fragment
-        android:id="@+id/firstFragment"
-        android:name="com.example.wowebackand.views.FirstFragment"
-        android:label="First Fragment"
-        tools:layout="@layout/first_fragment" />
-    <fragment
         android:id="@+id/notification"
         android:name="com.example.wowebackand.views.recycles.DisplayNotificationView"
-        android:label="Second Fragment"
+        android:label="notification"
         tools:layout="@layout/notification" />
     <fragment
         android:id="@+id/MyProfileFrag"
         android:name="com.example.wowebackand.views.MyProfile"
-        android:label="Third Fragment"
+        android:label="MY PROFILE"
         tools:layout="@layout/my_profile" />
     <fragment
         android:id="@+id/defaultFragment"
         android:name="com.example.wowebackand.views.DefaultFragment"
-        android:label="Default Fragment"
+        android:label="Home"
         tools:layout="@layout/default_fragment" />
     <fragment
         android:id="@+id/serviceProvider"
@@ -40,7 +35,7 @@
         android:id="@+id/completedForm"
         android:name="com.example.wowebackand.views.Completed_full_appoitement"
         tools:layout="@layout/display_completed_appoitement_view"
-        android:label="completed"/>
+        android:label="completed Appoitement"/>
     <fragment
         android:id="@+id/makeAppoitement"
         android:name="com.example.wowebackand.views.MakeAppoitement"
@@ -49,7 +44,7 @@
     <fragment
         android:id="@+id/updateAppoitement"
         android:name="com.example.wowebackand.views.pending_full_appoitement"
-        android:label=" edit Appoitement"
+        android:label="pending Appoitement"
         tools:layout="@layout/layout_edit_appoitement"/>
 
     <fragment

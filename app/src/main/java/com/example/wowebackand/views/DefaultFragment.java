@@ -58,57 +58,7 @@ public class DefaultFragment extends Fragment {
         View view=inflater.inflate(R.layout.default_fragment, container, false);
 
         bottomNavigationView=view.findViewById(R.id.bottomNavigationView);
-//
-
-
-//        tabLayout=view.findViewById(R.id.default_Fragment_tablayout);
-//
-//        viewPager=view.findViewById(R.id.my_view_pager);
-//       FragmentManager manager=getFragmentManager();
-//       viewPager.setAdapter(new MyPagerAdapter(manager));
-//       tabLayout.setupWithViewPager(viewPager);
 
         return view;
     }
 }
-
-//class MyPagerAdapter extends FragmentStatePagerAdapter{
-//
-//    public MyPagerAdapter(FragmentManager fm) {
-//        super(fm);
-//    }
-//
-//    @Override
-//    public Fragment getItem(int position) {
-//
-//        switch (position) {
-//            case 0:
-//                return new DisplayFragService();
-//            case 1:
-//                return new DisplayFragComplete();
-//            case 2:
-//                return new DisplayFragPending();
-//        }
-//        return null;
-//    }
-//
-//    @Override
-//    public int getCount() {
-//        return 3;
-//    }
-//
-//    @Nullable
-//    @Override
-//    public CharSequence getPageTitle(int position) {
-//       switch (position){
-//           case 0:
-//               return "services";
-//           case 1:
-//               return "completed";
-//           case 2:
-//               return "peding";
-//       }
-//        return null;
-//    }
-//
-//}
