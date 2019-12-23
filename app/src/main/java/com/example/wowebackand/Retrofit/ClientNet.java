@@ -32,7 +32,7 @@ public interface ClientNet
      * @param filter
      * @return
      */
-    @POST("/clients/all")
+    @POST("/public/twese/clients/all")
     Call<List<Client>> getListTech(@Body ClientFilter filter);
 
     @POST("/clients/password")

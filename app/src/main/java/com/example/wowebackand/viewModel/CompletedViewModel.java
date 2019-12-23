@@ -1,6 +1,7 @@
 package com.example.wowebackand.viewModel;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.filters.AppNotFilter;
@@ -18,10 +19,12 @@ public class CompletedViewModel extends AndroidViewModel {
     AppoitementRespostory respostory;
     LiveData<List<Appoitement>> liveData;
     List<Appoitement> appoitements;
+    Context context;
 
     public CompletedViewModel(@NonNull Application application) {
         super(application);
         respostory = new AppoitementRespostory(application);
+        this.context=application;
     }
 
     public void deleteAppoitement(Appoitement appoitement) {
@@ -33,7 +36,7 @@ public class CompletedViewModel extends AndroidViewModel {
         filter.setClientId(1);
         filter.setStatus(1);
 //        appoitements=respostory.getAppoitements(filter);
-        liveData = respostory.getAppoitements(filter);
+        liveData = respostory.getAppoitements(filter,context);
         return liveData;
     }
 }

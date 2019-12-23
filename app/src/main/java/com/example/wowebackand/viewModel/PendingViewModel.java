@@ -1,6 +1,7 @@
 package com.example.wowebackand.viewModel;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.wowebackand.models.Appoitement;
@@ -22,10 +23,12 @@ public class PendingViewModel extends AndroidViewModel
     AppoitementRespostory respostory;
     LiveData<List<Appoitement>> liveData;
     List<Appoitement> appoitements;
+    Context context;
 
     public PendingViewModel(@NonNull Application application) {
         super(application);
         respostory=new AppoitementRespostory(application);
+        this.context=application;
     }
 
     public void deleteAppoitement(Appoitement appoitement){
@@ -37,7 +40,7 @@ public class PendingViewModel extends AndroidViewModel
         filter.setClientId(1);
         filter.setStatus(0);
 //        appoitements=respostory.getAppoitements(filter);
-        liveData=  respostory.getAppoitements(filter);
+        liveData=  respostory.getAppoitements(filter,context);
         return liveData;
     }
     public void  PendToComp(List<Appoitement> appoitements){

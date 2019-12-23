@@ -1,6 +1,7 @@
 package com.example.wowebackand.respostory;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -37,12 +38,12 @@ public class NotificationRespostory
         this.application = application;
     }
 
-    public LiveData<List<Notification>> getNotifications(AppNotFilter filter){
+    public LiveData<List<Notification>> getNotifications(AppNotFilter filter, Context context){
       int l= getLastNotficationId();
 //        new Handler().postDelayed(()->{
             filter.setId(l);
 
-            insertNotificationDataInDatabase(filter,dao,net);
+            insertNotificationDataInDatabase(filter,dao,net,context);
 //        },2000);
 
         return dao.getAll();
@@ -67,11 +68,11 @@ public class NotificationRespostory
         new DeleteNotification(dao).execute(notification);
     }
 
-    public static void insertNotificationDataInDatabase(AppNotFilter filter, NotificationDao dao, NotificationNet notificationNet) {
+    public static void insertNotificationDataInDatabase(AppNotFilter filter, NotificationDao dao, NotificationNet notificationNet, Context context) {
         e++;
         if (e <= 1) {
             Call<List<Notification>> listCall = notificationNet.getNotifications(filter);
-            DoNet<List<Notification>> net = new DoNet(null,dao);
+            DoNet<List<Notification>> net = new DoNet(null,dao,context);
             listCall.enqueue(net);
         }
     }

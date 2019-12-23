@@ -12,4 +12,15 @@
         android:id="@+id/loginFragment"
         android:name="com.example.wowebackand.views.LogIn"
         tools:layout="@layout/login_fragment"/>
+
+    <fragment
+        android:id="@+id/serviceFragment"
+        android:name="com.example.wowebackand.views.recycles.DisplayFragService"
+        android:label="service"
+        tools:layout="@layout/layout_frag_service" />
+    <fragment
+        android:id="@+id/serviceProvider"
+        android:name="com.example.wowebackand.views.recycles.DisplayServiceProvider"
+        android:label="techinicians"
+        tools:layout="@layout/layout_frag_service_provider"/>
 </navigation>

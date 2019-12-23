@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.wowebackand.R;
 import com.example.wowebackand.activities.MainActivity;
+import com.example.wowebackand.activities.SecActivity;
 import com.example.wowebackand.views.adapter.AdapterService;
 
 import androidx.annotation.NonNull;
@@ -48,7 +49,15 @@ public class DisplayFragService extends Fragment {
             /**
              * for navigaing to other fragment,and passing other data uusing bundle
              * am gona to run about actions in fragments
-             */ MainActivity.navController.navigate(R.id.serviceProvider,new Bundle());
+             */
+            if (MainActivity.navController!=null)
+                MainActivity.navController.navigate(R.id.serviceProvider,new Bundle());
+            else
+                {
+                if (SecActivity.controller != null) {
+                    SecActivity.controller.navigate(R.id.serviceProvider,new Bundle());
+                }
+            }
         }),getActivity());
         recyclerView.setAdapter(adapterService);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),calculateNumberOfColumns(2));

@@ -52,7 +52,7 @@ public class LogIn extends Fragment {
 
 
     EditText userName, password;
-    Button signIn;
+    Button signIn,makeService;
     TextView forget, create;
     ClientForm clientForm;
     ProgressBar progressBar;
@@ -67,6 +67,9 @@ public class LogIn extends Fragment {
         forget = view.findViewById(R.id.login_forget_password);
         create = view.findViewById(R.id.login_registration);
         progressBar=view.findViewById(R.id.probar);
+        makeService=view.findViewById(R.id.make_service);
+
+
 
         loginViewModel= ViewModelProviders.of(this).get(LoginViewModel.class);
 
@@ -103,15 +106,15 @@ public class LogIn extends Fragment {
                         editor.putInt("clientId",client.getClientId());
                         editor.commit();
                         progressBar.setVisibility(View.GONE);
-//                    MainViewModel.setClientId(client.getClientId());
-//                    MainActivity.navController.navigate(R.id.defaultFragment);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         startActivity(intent);
                     }
 
                 });
                 new Handler().postDelayed(()->{
                     progressBar.setVisibility(View.GONE);
-                    makeToast("the user does not exist");
+                    Toast.makeText(getActivity(),"the user does not exist",Toast.LENGTH_SHORT).show();
+//                    makeToast("the user does not exist");
 //                        return;
                 },10000);
             }
@@ -120,6 +123,10 @@ public class LogIn extends Fragment {
 
         create.setOnClickListener((view1) -> {
             SecActivity.controller.navigate(R.id.registerFragment);
+        });
+
+        makeService.setOnClickListener(view1 -> {
+            SecActivity.controller.navigate(R.id.serviceFragment);
         });
 
         forget.setOnClickListener((view1) -> {

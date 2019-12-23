@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,8 +57,8 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
         linearLayout = findViewById(R.id.my_linear_layout);
         setupNavigation();
-//        if (AppoitementRespostory.i <= 1)
-            initializeUser();
+        initializeUser();
+
     }
 
     private void setupNavigation() {
@@ -65,26 +66,22 @@ public class MainActivity extends AppCompatActivity implements
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
-//        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
-
-
-        drawerLayout = findViewById(R.id.drawer_layout);
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         navigationView = findViewById(R.id.navigationView);
 
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
 
         NavigationUI.setupWithNavController(navigationView, navController);
 
         navigationView.setNavigationItemSelectedListener(this);
-
 
     }
 
@@ -97,11 +94,15 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START);
-        } else {
+//        if (drawerLayout != null) {
+            if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                drawerLayout.closeDrawer(GravityCompat.START);
+//            }
+        }
+            else {
             super.onBackPressed();
         }
+
     }
 
     @Override
@@ -176,15 +177,16 @@ public class MainActivity extends AppCompatActivity implements
     public void initializeUser() {
 //        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        sharedPreferences= getSharedPreferences("userDetails", Context.MODE_PRIVATE);
-
-        Const.token = sharedPreferences.getString("token", "token");
-        Const.email = sharedPreferences.getString("email", "email");
-        Const.userId = sharedPreferences.getInt("clientId", 0);
-        Const.userName = sharedPreferences.getString("userName", "user");
-        Const.phone=sharedPreferences.getString("phone","0785336934");
-        Log.e("mainActivity","initializing shared preference");
-//    Const.userId=editor.
-
+        sharedPreferences = getSharedPreferences("userDetails", Context.MODE_PRIVATE);
+//        if (sharedPreferences.contains("token") && sharedPreferences.contains("username") && sharedPreferences.contains("clientId")) {
+            Const.token = sharedPreferences.getString("token", "token");
+            Const.email = sharedPreferences.getString("email", "email");
+            Const.userId = sharedPreferences.getInt("clientId", 0);
+            Const.userName = sharedPreferences.getString("userName", "user");
+            Const.phone = sharedPreferences.getString("phone", "078800000000");
+            Log.e("mainActivity", "initializing shared preference");
+//            return true;
+//        } else
+//            return false;
     }
 }

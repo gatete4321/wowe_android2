@@ -1,5 +1,7 @@
 package com.example.wowebackand.Retrofit;
 
+import android.content.Intent;
+
 import com.example.wowebackand.models.Appoitement;
 import com.example.wowebackand.models.AppoitementForm;
 import com.example.wowebackand.models.constant.Const;
@@ -40,5 +42,8 @@ public interface AppoitementNet
 
     @POST()
     Call<Appoitement> updateAppoitent(@Body Appoitement appoitement);
+
+    @POST("/app/techImage")
+    Call<String> getTechImage(@Body Integer clientId);
 }
 //    @Header("Authorization") String header,

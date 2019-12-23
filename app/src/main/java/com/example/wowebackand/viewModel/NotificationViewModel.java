@@ -1,6 +1,7 @@
 package com.example.wowebackand.viewModel;
 
 import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -20,15 +21,18 @@ public class NotificationViewModel extends AndroidViewModel{
     NotificationRespostory respostory;
     LiveData<List<Notification>> notificationLiveData;
     List<Notification> notifications;
+    Context context;
     public NotificationViewModel(@NonNull Application application) {
         super(application);
         respostory=new NotificationRespostory(application);
+        this.context=application;
+
     }
 
     public LiveData<List<Notification>> getNotificationLiveData(){
         AppNotFilter filter=new AppNotFilter();
         filter.setClientId(1);//tuzakurura izo yakorewe gusa apana izo yakoze
-        notificationLiveData= respostory.getNotifications(filter);
+        notificationLiveData= respostory.getNotifications(filter,context);
         return notificationLiveData;
 
     }

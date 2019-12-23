@@ -96,7 +96,8 @@ public class Completed_full_appoitement extends Fragment
             description.append(appoitement.getDescription());
             techName.append(appoitement.getTechName());
             if (isNetworkAvaible()){
-                initializeImages(appoitement.getClientId(),techPic);
+                String techImage=getTechImage(appoitement.getClientId());
+                initializeImages(techImage,techPic);
             }
             else {
                 techPic.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
@@ -108,6 +109,10 @@ public class Completed_full_appoitement extends Fragment
                 ratingBar.setRating(appoitement.getRate());
             }
         }
+    }
+
+    private String getTechImage(Integer clientId) {
+        return null;
     }
 
     /**
@@ -127,14 +132,27 @@ public class Completed_full_appoitement extends Fragment
         ratingBar=view.findViewById(R.id.app_view_ratingBar);
     }
 
-    void initializeImages(Integer imageId,ImageView imageView){
-        String full= Const.urlImageId+imageId;
-        Picasso.with(context)
-                .load(full)
-                .fit()
-                .centerInside()
-                .into(imageView);
-    }
+    /**
+     * this was because i used my own server
+     * @param imageId
+     * @param imageView
+     */
+//    void initializeImages(Integer imageId,ImageView imageView){
+//        String full= Const.urlImageId+imageId;
+//        Picasso.with(context)
+//                .load(full)
+//                .fit()
+//                .centerInside()
+//                .into(imageView);
+//    }
+void initializeImages(String imageId,ImageView imageView){
+    String full= Const.urlImageId+imageId;
+    Picasso.with(context)
+            .load(full)
+            .fit()
+            .centerInside()
+            .into(imageView);
+}
     private boolean isNetworkAvaible() {
 
         boolean connected = false;

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 
 import com.example.wowebackand.R;
+import com.example.wowebackand.activities.SecActivity;
 import com.example.wowebackand.models.Service;
 import com.example.wowebackand.activities.MainActivity;
 
@@ -54,7 +55,16 @@ public class AdapterService extends RecyclerView.Adapter<AdapterService.MyViewHo
              */
             Bundle bundle=new Bundle();
             bundle.putInt("serviceId",service.getServiceId());
-            MainActivity.navController.navigate(R.id.serviceProvider,bundle);
+
+            if (MainActivity.navController!=null)
+                MainActivity.navController.navigate(R.id.serviceProvider,bundle);
+            else
+            {
+                if (SecActivity.controller != null) {
+                    SecActivity.controller.navigate(R.id.serviceProvider,bundle);
+                }
+            }
+//            MainActivity.navController.navigate(R.id.serviceProvider,bundle);
         });
     }
 

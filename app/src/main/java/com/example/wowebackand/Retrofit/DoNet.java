@@ -1,7 +1,9 @@
 package com.example.wowebackand.Retrofit;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -31,9 +33,12 @@ public class DoNet<T> implements Callback<T> {
 
     public NotificationDao notificationDao;
 
-    public DoNet(AppoitementDao dao,NotificationDao notificationDao) {
+    public Context context;
+
+    public DoNet(AppoitementDao dao,NotificationDao notificationDao,Context context) {
         this.dao = dao;
         this.notificationDao=notificationDao;
+        this.context=context;
     }
 
     public DoNet() {
@@ -43,7 +48,17 @@ public class DoNet<T> implements Callback<T> {
     public void onResponse(Call<T> call, Response<T> response) {
 
         if (!response.isSuccessful()) {
-            Log.e("unsucesfull", "code error:" + response.code());
+//            Log.e("unsucesfull", "code error:" + response.code());
+
+            switch (response.code()){
+                case 404:
+                    makeToast("not found");
+                    return;
+                case 401:
+                    makeToast("please login again");
+                    return;
+            }
+
             return;
         }
         Log.e("Donet", "nahageze tu");
@@ -76,6 +91,10 @@ public class DoNet<T> implements Callback<T> {
 
     public void setLiveData(MutableLiveData<T> liveData) {
         this.liveData = liveData;
+    }
+
+    public void makeToast(String message){
+        Toast.makeText(context,message,Toast.LENGTH_SHORT).show();
     }
 
 

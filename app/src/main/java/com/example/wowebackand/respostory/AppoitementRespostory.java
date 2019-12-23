@@ -1,6 +1,7 @@
 package com.example.wowebackand.respostory;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
@@ -67,12 +68,12 @@ public class AppoitementRespostory {
      * @param filter
      * @return
      */
-    public Appoitement getAppoitement(AppNotFilter filter) {
-        Call<Appoitement> appoitementCall = appoitementNet.getAppoitement(filter);
-        DoNet net = new DoNet<Appoitement>();
-        appoitementCall.enqueue(net);
-        return (Appoitement) net.getLiveData().getValue();
-    }
+//    public Appoitement getAppoitement(AppNotFilter filter) {
+//        Call<Appoitement> appoitementCall = appoitementNet.getAppoitement(filter);
+//        DoNet net = new DoNet<Appoitement>();
+//        appoitementCall.enqueue(net);
+//        return (Appoitement) net.getLiveData().getValue();
+//    }
 
     /**
      * list of completed appoitements and pending appoitements
@@ -80,13 +81,13 @@ public class AppoitementRespostory {
      *
      * @return
      */
-    public LiveData<List<Appoitement>> getAppoitements(AppNotFilter filter) {
+    public LiveData<List<Appoitement>> getAppoitements(AppNotFilter filter, Context context) {
 
         if (filter.getStatus() == 1) {
             filter.setStatus(null);
             getLastAppoitementId();
             filter.setId(lastId);
-            insertDataInDatabase(filter, dao, appoitementNet);
+            insertDataInDatabase(filter, dao, appoitementNet,context);
             filter.setStatus(1);
             /**
              * ibi nabikoze kubera ko nshaka ko i fetchinga data kuri online 1 gusa kandi kuri completed fragment yonyine
@@ -102,13 +103,14 @@ public class AppoitementRespostory {
      * iyi icyo idufasha nu ku insertinga all appoitement muri data base
      *
      * @param filter
+     * @param context
      */
-    public static void insertDataInDatabase(AppNotFilter filter, AppoitementDao dao, AppoitementNet appoitementNet) {
+    public static void insertDataInDatabase(AppNotFilter filter, AppoitementDao dao, AppoitementNet appoitementNet, Context context) {
         i++;
         if (i <= 1) {
 //            String token= "Bearer "+Const.token;
             Call<List<Appoitement>> listCall = appoitementNet.getAllAppoitements(filter);
-            DoNet<List<Appoitement>> net = new DoNet(dao,null);
+            DoNet<List<Appoitement>> net = new DoNet(dao,null,context);
             listCall.enqueue(net);
         }
     }
@@ -120,7 +122,7 @@ public class AppoitementRespostory {
         AppNotFilter filter=new AppNotFilter();
         filter.setAppoitementId(appoitementId);
         Call<String> stringCall=appoitementNet.deleteAppoitement(filter);
-        DoNet<String> net=new DoNet<>(null,null);
+        DoNet<String> net=new DoNet<>();
         stringCall.enqueue(net);
     }
 
@@ -137,6 +139,10 @@ public class AppoitementRespostory {
     }
 
     public void feedBack() {
+
+    }
+
+    public void getTechImage(){
 
     }
 

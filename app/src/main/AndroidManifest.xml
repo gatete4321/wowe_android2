@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.SecActivity"/>
+        <activity android:name=".activities.SecActivity"
+            android:noHistory="true"
+            />
         <activity android:name=".activities.MainActivity"/>
     </application>
 
