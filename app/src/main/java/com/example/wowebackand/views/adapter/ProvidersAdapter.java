@@ -68,24 +68,21 @@ public class ProvidersAdapter extends RecyclerView.Adapter<ProvidersAdapter.MyPr
             holder.techName.setText(client.getUsername());
             initializeImages(client.getProfileImage(), holder.techImage);//loading image
 
-            holder.makeApp.setOnClickListener((view) -> {
-                MainActivity.navController.navigate(R.id.makeAppoitement, bundle);
-            });
 
 
             holder.calling.setOnClickListener((view) -> {
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + client.getPhoneNumber()));
                 context.startActivity(intent);
             });
-            holder.view.setOnClickListener((view) -> {
 
-                MainActivity.navController.navigate(R.id.techDetail, bundle);
-                /**
-                 * hano turajya kuri displayTechnician
-                 * #nayo iza kuba iri muri recycleview arko iri left ariko i displayinga full size one item#hano ni cyera man
-                 * #twabigize fragment imwe#ibya vuba
-                 * dupassinzemo client.class
-                 */
+            holder.view.setOnClickListener((view) -> {
+                if (Const.userName!=null){
+                MainActivity.navController.navigate(R.id.techDetail, bundle);}
+            });
+            holder.makeApp.setOnClickListener((view) -> {
+                if (Const.userName!=null){
+                MainActivity.navController.navigate(R.id.makeAppoitement, bundle);
+                }
             });
 
         }

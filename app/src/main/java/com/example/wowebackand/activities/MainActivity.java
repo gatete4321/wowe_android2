@@ -161,10 +161,18 @@ public class MainActivity extends AppCompatActivity implements
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.clear();
             editor.commit();
+
+            Const.userName=null;
+            Const.phone=null;
+            Const.userId=null;
+            Const.token=null;
+            Const.email=null;
+
             startActivity(intent);
             /**
              * tuzahasyira code zo ku loginga out
              */
+
             Toast.makeText(this, "log out", Toast.LENGTH_SHORT).show();
             dialog.dismiss();
         });
