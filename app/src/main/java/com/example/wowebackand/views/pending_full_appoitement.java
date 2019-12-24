@@ -25,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.Date;
+
 /**
  * ndacyeka kuri layout nyeneye scrolview kugirango bi fitinge tu
  */
@@ -34,6 +36,8 @@ public class pending_full_appoitement extends Fragment
     Context context;
     Integer phoneNumber;
     String loct,descr;
+
+
 
     TextView serviceName,techName;
     ImageView techPic;
@@ -66,6 +70,7 @@ public class pending_full_appoitement extends Fragment
         });
 
 
+
         return view;
     }
 
@@ -85,10 +90,11 @@ public class pending_full_appoitement extends Fragment
 
     private void initializeFakeData() {
         if (appoitement!=null){
-            serviceName.setText("gukanika"+appoitement.getClientId());
-            techName.setText("gahire"+appoitement.getServiceId());
-            techPic.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
+            serviceName.setText(Const.getServicesIdName(appoitement.getServiceId()));
+            techName.setText(appoitement.getTechName());
+//            techPic.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
             calendarView.setDate(appoitement.getDoneTime().getTime());
+            description.setHint(appoitement.getDescription());
             if (isNetworkAvaible()){
                 initializeImages(appoitement.getClientId(),techPic);
             }

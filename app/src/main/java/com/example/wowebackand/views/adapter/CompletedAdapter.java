@@ -44,8 +44,8 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
     @Override
     public void onBindViewHolder(@NonNull CompletedAdapter.MyCompletedViewHoleder holder, int position) {
             Appoitement appoitement = appoitements.get(position);
-            holder.serviceName.setText("wowe" + appoitement.getServiceId());
-            holder.techName.setText("rukara" + appoitement.getClientId());
+            holder.serviceName.setText(Const.getServicesIdName(appoitement.getServiceId()));
+            holder.techName.setText(appoitement.getTechName());
             holder.date.setText(appoitement.getDoneTime().getDay() + "/" + appoitement.getDoneTime().getMonth() + "/" + (1900 + appoitement.getDoneTime().getYear()));
             holder.imageView.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
             holder.view.setOnClickListener((view) -> {
@@ -82,13 +82,9 @@ public class CompletedAdapter extends RecyclerView.Adapter<CompletedAdapter.MyCo
             serviceName=itemView.findViewById(R.id.completed_item_text_view_service_name);
             date=itemView.findViewById(R.id.completed_item_date_display);
             techName=itemView.findViewById(R.id.completed_item_display_tech_name);
-//            shimmerFrameLayout=itemView.findViewById(R.id.shimmer_layout_completed);
 
             view=itemView;
 
-//            itemView.setOnClickListener((view)->{
-//                listener.onRecyclerViewItemCliked(getAdapterPosition(),appoitements.get(getAdapterPosition()));
-//            });
         }
     }
     public void setAppoitements(List<Appoitement> appoitements){

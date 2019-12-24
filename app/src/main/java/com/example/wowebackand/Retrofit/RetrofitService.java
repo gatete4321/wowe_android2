@@ -24,7 +24,7 @@ public class RetrofitService
 
     public RetrofitService() {
 
-        Gson gson=new GsonBuilder().serializeNulls().create();
+        Gson gson=new GsonBuilder().serializeNulls().create();//if i want to send nulls on the server
         loggingInterceptor=new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         okHttpClient=new OkHttpClient.Builder()
@@ -43,8 +43,8 @@ public class RetrofitService
 
 
         retrofit = new Retrofit.Builder()
-//                .baseUrl("https://wowe3.cfapps.io")
-                .baseUrl("http://10.0.2.2:9000")
+                .baseUrl("https://wowe2.cfapps.io")
+//                .baseUrl("http://10.0.2.2:9000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();

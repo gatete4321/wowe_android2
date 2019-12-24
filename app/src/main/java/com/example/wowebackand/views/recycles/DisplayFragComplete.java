@@ -45,7 +45,6 @@ public class DisplayFragComplete extends Fragment {
         viewModel = ViewModelProviders.of(this).get(CompletedViewModel.class);
         adapter = new CompletedAdapter();
         viewModel.getLiveData().observe(this, appoitements -> {
-//            appoitementList=appoitements;
             adapter.setAppoitements(appoitements);
             adapter.notifyDataSetChanged();
         });
@@ -65,16 +64,6 @@ public class DisplayFragComplete extends Fragment {
             }
         }).attachToRecyclerView(recyclerView);
 
-
-//        if (appoitementList != null) {
-//            adapter.setAppoitements(appoitementList);
-//            adapter.setAppoitements(appoitementList);
-//            adapter.showShimer=false;
-//            adapter.notifyDataSetChanged();
-//        }
-//        else {
-//            noData();
-//        }
         return view;
     }
 

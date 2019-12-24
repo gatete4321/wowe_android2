@@ -21,6 +21,9 @@ import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.respostory.AppoitementRespostory;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import androidx.annotation.NonNull;
@@ -38,6 +41,8 @@ public class MakeAppoitement extends Fragment {
     Bundle bundle;
     Client client;
 
+    Date calDate;
+
     Button submit;
     TextView serviceName, techName;
     ImageView techPic;
@@ -54,14 +59,35 @@ public class MakeAppoitement extends Fragment {
         initializeViews(view);
         initializeFakeData();
 
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView calendarView, int i, int i1, int i2) {
+
+                String  date=i2+"/"+(i1+1)+"/"+i;
+
+                try {
+                    calDate=new SimpleDateFormat("dd/MM/yyyy").parse(date);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Log.e("dateCalendar",calDate.toString());
+            }
+        });
+
+
         submit.setOnClickListener((view1) -> {
             if (phone.getText().toString().trim().isEmpty() || description.getText().toString().trim().isEmpty()) {
                 Toast.makeText(getContext(), "please enter phone,description", Toast.LENGTH_SHORT).show();
                 return;
             }
-            /**
-             * make appoitement
-             */
+
+            Calendar c=Calendar.getInstance();
+            c.add(Calendar.DATE,30);
+            if(calDate.before(new Date())||calDate.after(c.getTime())){
+                Log.e("date picked",calDate.toString()+calDate.getYear());
+                Toast.makeText(getContext(),"invalid date not above one month ",Toast.LENGTH_SHORT).show();
+                return;
+            }
             makeAppoitement();
             MainActivity.navController.navigate(R.id.defaultFragment);
         });
@@ -80,20 +106,6 @@ public class MakeAppoitement extends Fragment {
         location = view.findViewById(R.id.make_app_get_location);
         submit = view.findViewById(R.id.make_app_button_submit);
         context=getContext();
-//        submit.setOnClickListener((view1)->{
-//            /**
-//             * tuza submiinga data kuri server
-//             */
-//            if (location.getText().toString().trim().isEmpty()||
-//                description.getText().toString().trim().isEmpty()||
-//                phone.getText().toString().trim().isEmpty()
-//            ) {
-//               Toast.makeText(getContext(),"please fill data",Toast.LENGTH_SHORT).show();
-//               return;
-//            }
-//            makeAppoitement();
-//            MainActivity.navController.navigate(R.id.defaultFragment);
-//        });
     }
 
 
@@ -101,29 +113,24 @@ public class MakeAppoitement extends Fragment {
         if (!client.equals(null)) {
             serviceName.setText(Const.getServicesIdName(client.getServiceId()));
             techName.setText(client.getUsername());
+            phone.setHint(Const.phone);
 //            techPic.setImageResource(R.drawable.ic_email_account);
             initializeImages(client.getProfileImage(),techPic);
 
             Log.e("appoitement", "client not null");
             return;
         }
-//        serviceName.setText("gukanika");
-//        techName.setText("gahire");
-//        techPic.setImageResource(R.drawable.header);
-//        phoneNumber=phone.getInputExtras(true).getInt("phone");
-//        calendarView.setOnDateChangeListener((view,i,i1,i2)->{
-//            serviceName.setText((i1+1)+"/"+i2+"/"+i);
-//        });
     }
 
     private void makeAppoitement() {
+
         respostory = new AppoitementRespostory(getActivity().getApplication());
         AppoitementForm appoitement = new AppoitementForm();
 
         appoitement.setServiceId(client.getServiceId());
         appoitement.setClientId(Const.userId);//"uyu muyuza tu uri kuyikoresha"
         appoitement.setTechId(client.getClientId());
-        appoitement.setToday(new Date(calendarView.getDate()).getTime());
+        appoitement.setToday(calDate.getTime());
         appoitement.setDescription(description.getText().toString() + "@location" + location.getText().toString() + "@phone" + phone.getText().toString());
         appoitement.setTechName(client.getUsername());
         Integer result = respostory.insertAppoitement(appoitement);
