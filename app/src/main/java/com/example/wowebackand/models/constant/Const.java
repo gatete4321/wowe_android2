@@ -109,7 +109,6 @@ public  class Const
     /**
      * 0:completed
      * 1:pending
-     *
      * 99:deleted
      */
 
