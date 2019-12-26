@@ -39,7 +39,7 @@ public class PendingViewModel extends AndroidViewModel
     public LiveData<List<Appoitement>> getLiveData(){
         AppNotFilter filter=new AppNotFilter();
         filter.setClientId(Const.userId);
-        filter.setStatus(0);
+        filter.setStatus(1);
 //        appoitements=respostory.getAppoitements(filter);
         liveData=  respostory.getAppoitements(filter,context);
         return liveData;

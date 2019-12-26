@@ -32,7 +32,7 @@ public interface AppoitementDao
     @Query("update Appoitement set status=2 where appoitementId=:id")//set status:sts where appoitementId:appid")
     int updatePenToCom(Integer id);
 
-    @Query("update Appoitement set status=2 where appoitementId in(:appIds)")
+    @Query("update Appoitement set status=0 where appoitementId in(:appIds)")
     int updatePenToCom(List<Integer> appIds);
 
     @Query("DELETE FROM appoitement")

@@ -43,8 +43,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyviewHo
         holder.imageView.setImageResource(Const.serviceIdImag(appoitement.getServiceId()));
         holder.serviceName.setText(Const.getServicesIdName(appoitement.getServiceId()));
         holder.techName.setText(appoitement.getTechName());
-        holder.dateDisplay.setText(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
-        //        holder.imageView.draw(R.drawable.ic_edi);
+        holder.dateDisplay.setText(appoitement.getDoneTime().getDate()+"/"+(1+appoitement.getDoneTime().getMonth())+"/"+(1900+appoitement.getDoneTime().getYear()));
 
 
         holder.view2.setOnClickListener((view)->{

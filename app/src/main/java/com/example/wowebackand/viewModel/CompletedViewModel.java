@@ -35,7 +35,7 @@ public class CompletedViewModel extends AndroidViewModel {
     public LiveData<List<Appoitement>> getLiveData() {
         AppNotFilter filter = new AppNotFilter();
         filter.setClientId(Const.userId);
-        filter.setStatus(1);
+        filter.setStatus(0);
 //        appoitements=respostory.getAppoitements(filter);
         liveData = respostory.getAppoitements(filter,context);
         return liveData;

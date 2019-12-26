@@ -106,6 +106,12 @@ public  class Const
         }
         return "";
     }
+    /**
+     * 0:completed
+     * 1:pending
+     *
+     * 99:deleted
+     */
 
 
 }
