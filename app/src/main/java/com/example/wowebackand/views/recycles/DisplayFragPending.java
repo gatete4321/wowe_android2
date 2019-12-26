@@ -86,7 +86,6 @@ public class DisplayFragPending extends Fragment {
         new Handler().postDelayed(()->{
             if (appoitementList != null){
                 viewModel.PendToComp(appoitementList);
-                Log.e("PendToComp","nabikoze");
             }
         },3000);
 
@@ -111,26 +110,3 @@ public class DisplayFragPending extends Fragment {
 
     }
 }
-
-
-/**
- * iyi ndaza kuyishyira muri adapter
- * //             * nkore na network operation
- * //
- */
-//
-//            Calendar calendar=Calendar.getInstance();
-//
-//            int year=calendar.get(Calendar.YEAR);
-//            int month=calendar.get(Calendar.MONTH);
-//            int day=calendar.get(Calendar.DAY_OF_MONTH);
-//            DatePickerDialog dialog=new DatePickerDialog(getActivity(),
-//                    android.R.style.Theme_Holo_Light_Dialog_MinWidth,onDateSetListener,year,month,day);
-//            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//            dialog.show();
-//            TextView textView=(TextView)dateDisplay;
-//            textView.setText(date);
-//            /**
-//             * nago nkakoze fresh
-//             */
-//        }));

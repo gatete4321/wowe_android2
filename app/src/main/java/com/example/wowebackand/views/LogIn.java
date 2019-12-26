@@ -114,7 +114,7 @@ public class LogIn extends Fragment {
                 });
                 new Handler().postDelayed(()->{
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(getActivity(),"the user does not exist",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity().getApplicationContext(),"the user does not exist",Toast.LENGTH_SHORT).show();
 //                    makeToast("the user does not exist");
 //                        return;
                 },10000);

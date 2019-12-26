@@ -4,6 +4,16 @@ public class AppoitementForm extends Appoitement
 {
     private long today;
 
+    private String uyikozeName;
+
+    public String getUyikozeName() {
+        return uyikozeName;
+    }
+
+    public void setUyikozeName(String uyikozeName) {
+        this.uyikozeName = uyikozeName;
+    }
+
     public long getToday() {
         return today;
     }

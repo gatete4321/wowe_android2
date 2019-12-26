@@ -68,6 +68,10 @@ public class NotificationRespostory
         new DeleteNotification(dao).execute(notification);
     }
 
+    public void deleteAllNotification(){
+        new DeleteALLNotification(dao).execute();
+    }
+
     public static void insertNotificationDataInDatabase(AppNotFilter filter, NotificationDao dao, NotificationNet notificationNet, Context context) {
         e++;
         if (e <= 1) {
@@ -127,6 +131,20 @@ public class NotificationRespostory
         @Override
         protected Void doInBackground(Notification... notifications) {
             notificationDao.deleteNoification(notifications[0]);
+            return null;
+        }
+    }
+
+    private static class DeleteALLNotification extends AsyncTask<Void,Void,Void>{
+        private NotificationDao notificationDao;
+
+        public DeleteALLNotification(NotificationDao notificationDao) {
+            this.notificationDao=notificationDao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            notificationDao.deleteAllNOt();
             return null;
         }
     }

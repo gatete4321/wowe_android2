@@ -28,11 +28,16 @@ import com.example.wowebackand.R;
 
 import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.respostory.AppoitementRespostory;
+import com.example.wowebackand.respostory.NotificationRespostory;
 import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
+
+    AppoitementRespostory appoitementRespostory;
+
+    NotificationRespostory notificationRespostory;
 
     SharedPreferences sharedPreferences;
     Intent intent;
@@ -144,6 +149,10 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     void logoutP() {
+
+        appoitementRespostory=new AppoitementRespostory(getApplication());
+        notificationRespostory=new NotificationRespostory(getApplication());
+
         TextView logout, cancel;
 
         sharedPreferences = getSharedPreferences("userDetails", MODE_PRIVATE);
@@ -167,6 +176,8 @@ public class MainActivity extends AppCompatActivity implements
             Const.userId=null;
             Const.token=null;
             Const.email=null;
+            appoitementRespostory.deleteAllApp();
+            notificationRespostory.deleteAllNotification();
 
             startActivity(intent);
             /**

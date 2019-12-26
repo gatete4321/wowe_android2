@@ -150,7 +150,8 @@ public class ProvidersAdapter extends RecyclerView.Adapter<ProvidersAdapter.MyPr
                 String ijambo = charSequence.toString().toLowerCase().trim();
                 for (Client client : techniciansFull) {
                     if (client.getUsername().toLowerCase().contains(ijambo)
-                            || client.getClientLocation().toLowerCase().contains(ijambo)) {
+                            || client.getClientLocation().toLowerCase().contains(ijambo)
+                            ||client.getClientAbout().toLowerCase().contains(ijambo)) {
                         filteredTech.add(client);
                     }
                 }

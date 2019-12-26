@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.wowebackand.models.Notification;
+import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.models.filters.AppNotFilter;
 import com.example.wowebackand.respostory.NotificationRespostory;
 
@@ -31,7 +32,7 @@ public class NotificationViewModel extends AndroidViewModel{
 
     public LiveData<List<Notification>> getNotificationLiveData(){
         AppNotFilter filter=new AppNotFilter();
-        filter.setClientId(1);//tuzakurura izo yakorewe gusa apana izo yakoze
+        filter.setClientId(Const.userId);//tuzakurura izo yakorewe gusa apana izo yakoze
         notificationLiveData= respostory.getNotifications(filter,context);
         return notificationLiveData;
 

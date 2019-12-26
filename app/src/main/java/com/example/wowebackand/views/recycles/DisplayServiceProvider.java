@@ -58,14 +58,12 @@ public class DisplayServiceProvider extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_frag_service_provider, container, false);
 
-        setHasOptionsMenu(true);
+
         recyclerView=view.findViewById(R.id.service_provider);
 
         Bundle bundle = getArguments();
         if (bundle != null) {
-            Log.e("service", "bundle is not null");
             serviceId = bundle.getInt("serviceId");
-            Log.e("services", "not null" + serviceId);
         }
 
 
@@ -76,6 +74,7 @@ public class DisplayServiceProvider extends Fragment {
         if (!isNetworkAvaible()) {
             noData("turn on Connection");
         } else {
+            setHasOptionsMenu(true);
             shimmerFrameLayout = view.findViewById(R.id.shimmer_layout);
 
             recyclerView.setHasFixedSize(true);
@@ -84,7 +83,7 @@ public class DisplayServiceProvider extends Fragment {
             viewModel.getListClientLivedata(serviceId).observe(this, client -> {
                 clientList = client;
             });
-            adapter = new ProvidersAdapter(getActivity().getApplicationContext());
+            adapter = new ProvidersAdapter(getActivity());//.getApplicationContext());
 
             recyclerView.setAdapter(adapter);
 
@@ -146,7 +145,7 @@ public class DisplayServiceProvider extends Fragment {
 
         SearchView searchView= (SearchView) item.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setQueryHint("search name or location");
+        searchView.setQueryHint("search name,location,service");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

@@ -28,12 +28,21 @@ public class Notification
 
     private String description;
 
+    private Integer serviceId;
+
+    public Integer getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(Integer serviceId) {
+        this.serviceId = serviceId;
+    }
 
     @Ignore
     public Notification() {
     }
 
-    public Notification(Integer notficationId, Integer appoitementId, Integer status, Integer actionId, Date doneTime, Integer uwayikozeId, Integer uyikoreweId, String uwayikozeName, String description) {
+    public Notification(Integer notficationId, Integer appoitementId, Integer status, Integer actionId, Date doneTime, Integer uwayikozeId, Integer uyikoreweId, String uwayikozeName, String description, Integer serviceId) {
         this.notficationId = notficationId;
         this.appoitementId = appoitementId;
         this.status = status;
@@ -43,6 +52,7 @@ public class Notification
         this.uyikoreweId = uyikoreweId;
         this.uwayikozeName = uwayikozeName;
         this.description = description;
+        this.serviceId = serviceId;
     }
 
     public Integer getNotficationId() {

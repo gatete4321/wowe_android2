@@ -91,7 +91,7 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
         notification.setAppoitementId(notification2.getAppoitementId());
         notification.setUwayikozeId(notification2.getUyikoreweId());
         notification.setUyikoreweId(notification2.getUwayikozeId());
-        notification.setUwayikozeName("aha sharedpreference");
+        notification.setUwayikozeName(Const.userName);
         respostory.createNotification(notification);
 
 
@@ -132,6 +132,8 @@ public class DisplayNotificationAdapter extends RecyclerView.Adapter<RecyclerVie
             notification.setUyikoreweId(a + 10);
             notification.setDoneTime(new Date());
             notification.setUwayikozeName("mimi");
+            notification.setServiceId(1);
+            notification.setDescription("ejo");
             notifications.add(notification);
         }
     }
@@ -165,7 +167,7 @@ class NotAction1 extends RecyclerView.ViewHolder {
 
     public void setAction1(Notification notification) {
         clientName.setText("name:"+notification.getUwayikozeName());
-        appDescr.setText("descr:"+notification.getAppoitementId() + "kogosha inyamirambo");
+        appDescr.setText("about:"+notification.getDescription());
         serviceImage.setImageResource(Const.serviceIdImag(notification.getActionId()));
         date.setText("Date:"+notification.getDoneTime().getDate() + "/" + notification.getDoneTime().getMonth() + "/" + (1900 + notification.getDoneTime().getYear()));
     }
@@ -188,7 +190,7 @@ class NotActionOthers extends RecyclerView.ViewHolder {
 
     public void setOthers(Notification notification) {
         techName.setText("name:"+notification.getUwayikozeName());
-        serviceName.setText("service:"+"gufura");
+        serviceName.setText("service:"+Const.getServicesIdName(notification.getServiceId()));
         umwanzuro.setText(Const.namesAction(notification.getActionId()));
         techImage.setImageResource(Const.serviceIdImag(notification.getActionId()));
         date.setText("Date:"+notification.getDoneTime().getDate() + "/" + notification.getDoneTime().getMonth() + "/" + (1900 + notification.getDoneTime().getYear()));

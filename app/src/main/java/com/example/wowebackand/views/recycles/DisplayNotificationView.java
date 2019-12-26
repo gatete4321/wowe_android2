@@ -74,15 +74,6 @@ public class DisplayNotificationView extends Fragment {
             }
         }).attachToRecyclerView(recyclerView);
 
-//        new Handler().postDelayed(()->{
-//            if (notifications!=null){
-//                adapter.setNotifications(notifications);
-//                adapter.showShimer=false;
-//                adapter.notifyDataSetChanged();
-//            }
-//            else
-//                noData();
-//        },3000);
         return view;
     }
     void noData(){

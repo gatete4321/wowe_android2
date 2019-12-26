@@ -114,7 +114,6 @@ public class MakeAppoitement extends Fragment {
             serviceName.setText(Const.getServicesIdName(client.getServiceId()));
             techName.setText(client.getUsername());
             phone.setHint(Const.phone);
-//            techPic.setImageResource(R.drawable.ic_email_account);
             initializeImages(client.getProfileImage(),techPic);
 
             Log.e("appoitement", "client not null");
@@ -133,6 +132,7 @@ public class MakeAppoitement extends Fragment {
         appoitement.setToday(calDate.getTime());
         appoitement.setDescription(description.getText().toString() + "@location" + location.getText().toString() + "@phone" + phone.getText().toString());
         appoitement.setTechName(client.getUsername());
+        appoitement.setUyikozeName(Const.userName);
         Integer result = respostory.insertAppoitement(appoitement);
         if (result != null) {
             if (result != 1)

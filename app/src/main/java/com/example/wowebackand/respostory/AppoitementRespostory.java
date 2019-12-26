@@ -134,6 +134,10 @@ public class AppoitementRespostory {
         new DeleteAppoitement(dao).execute(appoitement);
     }
 
+    public void deleteAllApp(){
+        new DeleteALLAppoitements(dao).execute();
+    }
+
     public void updatePendToComp(List<Integer> integers){
         new UpdatePendiToCompl(dao).execute(integers);
     }
@@ -209,5 +213,19 @@ public class AppoitementRespostory {
         }
     }
 
+
+    private static class DeleteALLAppoitements extends AsyncTask<Void,Void,Void>{
+        private AppoitementDao appoitementDao;
+
+        public DeleteALLAppoitements(AppoitementDao appoitementDao) {
+            this.appoitementDao = appoitementDao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            appoitementDao.deleteAllApp();
+            return null;
+        }
+    }
 
 }

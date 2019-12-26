@@ -26,4 +26,7 @@ public interface NotificationDao
     Integer getLastNotificationId();
     @Query("select last_insert_rowid()  from Notification")
     Integer getLastIdNotification();
+
+    @Query("DELETE FROM notification")
+    void deleteAllNOt();
 }

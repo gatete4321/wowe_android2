@@ -34,4 +34,7 @@ public interface AppoitementDao
 
     @Query("update Appoitement set status=2 where appoitementId in(:appIds)")
     int updatePenToCom(List<Integer> appIds);
+
+    @Query("DELETE FROM appoitement")
+    void deleteAllApp();
 }

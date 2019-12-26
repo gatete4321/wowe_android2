@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.wowebackand.models.Appoitement;
+import com.example.wowebackand.models.constant.Const;
 import com.example.wowebackand.models.filters.AppNotFilter;
 import com.example.wowebackand.respostory.AppoitementRespostory;
 
@@ -37,7 +38,7 @@ public class PendingViewModel extends AndroidViewModel
 
     public LiveData<List<Appoitement>> getLiveData(){
         AppNotFilter filter=new AppNotFilter();
-        filter.setClientId(1);
+        filter.setClientId(Const.userId);
         filter.setStatus(0);
 //        appoitements=respostory.getAppoitements(filter);
         liveData=  respostory.getAppoitements(filter,context);

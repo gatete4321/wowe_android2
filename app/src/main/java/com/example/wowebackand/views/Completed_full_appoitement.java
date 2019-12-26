@@ -89,7 +89,6 @@ public class Completed_full_appoitement extends Fragment
         bundle=getArguments();
         appoitement=bundle.getParcelable("completed");
         if (!appoitement.equals(null)){
-            Log.e("commpleted","appoitement nago ari null");
             createDate.append(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
             serviceName.append(Const.getServicesIdName(appoitement.getServiceId()));
             doneTime.append(appoitement.getDoneTime().getDay()+"/"+appoitement.getDoneTime().getMonth()+"/"+(1900+appoitement.getDoneTime().getYear()));
