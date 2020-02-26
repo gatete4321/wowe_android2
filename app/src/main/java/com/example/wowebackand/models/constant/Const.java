@@ -65,7 +65,7 @@ public  class Const
             case 7:
                 return R.drawable.umubaji;
             case 8:
-                return R.drawable.shoferi;
+                return R.drawable.camera;
         }
         return R.drawable.abubatsi;
     }
@@ -87,7 +87,7 @@ public  class Const
             case 7:
                 return "kubaza";
             case 8:
-                return "gutwara";
+                return "gufotora";
         }
         return "umwuga";
     }

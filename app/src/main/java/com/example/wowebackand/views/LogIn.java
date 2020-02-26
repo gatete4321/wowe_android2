@@ -1,5 +1,6 @@
 package com.example.wowebackand.views;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,6 +44,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LogIn extends Fragment {
+
+
+
+    ClientRespostory respostory;
     ClientNet net;
     String uName, pwd;
     SharedPreferences preferences;
@@ -50,6 +55,8 @@ public class LogIn extends Fragment {
 
     LoginViewModel loginViewModel;
 
+
+    Dialog dialog;
 
 
     EditText userName, password;
@@ -135,6 +142,7 @@ public class LogIn extends Fragment {
              * hano turaza gufungura indi fragment yo ku coveringa password
              * arko turaza kuyohereza kuri email password
              */
+            forgetPassword();
         });
 
         return view;
@@ -184,5 +192,50 @@ public class LogIn extends Fragment {
     public void onStop() {
         super.onStop();
         ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+    }
+
+
+    void forgetPassword(){
+        TextView cancel;
+        EditText emailRecover;
+        Button submit;
+        dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.dialbox_forget_password);
+        cancel=dialog.findViewById(R.id.dialog_forget_cancel);
+        emailRecover=dialog.findViewById(R.id.dialbox_forget_email);
+        submit=dialog.findViewById(R.id.dialbox_forget_submit);
+
+        cancel.setOnClickListener(view->{
+            dialog.dismiss();
+        });
+
+        submit.setOnClickListener(view -> {
+            if (emailRecover.getText().toString().trim().isEmpty()){
+                Toast.makeText(getContext(), "please fill real data", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(!emailRecover.getText().toString().trim().toLowerCase().contains("@gmail.com")){
+                Toast.makeText(getContext(), "please real gmail", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (submitEmail(emailRecover.getText().toString().trim())){
+                ClientRespostory.check = false;
+                Toast.makeText(getContext(), "check your  email", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+            dialog.dismiss();
+            Toast.makeText(getContext(), "failed to send email", Toast.LENGTH_SHORT).show();
+        });
+        dialog.show();
+    }
+    private boolean submitEmail(String email) {
+        boolean check = false;
+
+        ClientFilter filter = new ClientFilter();
+        filter.setEmail(email);
+
+        respostory = new ClientRespostory();
+        check = respostory.updateDatas(filter, 3);
+        return check;
     }
 }

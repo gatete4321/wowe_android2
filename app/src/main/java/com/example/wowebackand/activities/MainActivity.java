@@ -179,6 +179,8 @@ public class MainActivity extends AppCompatActivity implements
             appoitementRespostory.deleteAllApp();
             notificationRespostory.deleteAllNotification();
 
+            MainActivity.navController=null;//make it null in order to use
+
             startActivity(intent);
             /**
              * tuzahasyira code zo ku loginga out

@@ -89,11 +89,11 @@ public class Completed_full_appoitement extends Fragment
         bundle=getArguments();
         appoitement=bundle.getParcelable("completed");
         if (!appoitement.equals(null)){
-            createDate.setText("createDate"+appoitement.getCreateTime().getDate()+"/"+(1+appoitement.getCreateTime().getMonth())+"/"+(1900+appoitement.getCreateTime().getYear()));
-            serviceName.setText("service"+Const.getServicesIdName(appoitement.getServiceId()));
-            doneTime.setText("doneTime"+appoitement.getDoneTime().getDate()+"/"+(1+appoitement.getDoneTime().getMonth())+"/"+(1900+appoitement.getDoneTime().getYear()));
-            description.setText("description"+appoitement.getDescription());
-            techName.append(appoitement.getTechName());
+            createDate.setText("createDate:"+appoitement.getCreateTime().getDate()+"/"+(1+appoitement.getCreateTime().getMonth())+"/"+(1900+appoitement.getCreateTime().getYear()));
+            serviceName.setText("service:"+Const.getServicesIdName(appoitement.getServiceId()));
+            doneTime.setText("doneTime:"+appoitement.getDoneTime().getDate()+"/"+(1+appoitement.getDoneTime().getMonth())+"/"+(1900+appoitement.getDoneTime().getYear()));
+            description.setText("description:"+appoitement.getDescription());
+            techName.setText("techName:"+appoitement.getTechName());
             if (isNetworkAvaible()){
                 String techImage=getTechImage(appoitement.getClientId());
                 initializeImages(techImage,techPic);

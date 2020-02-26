@@ -1,8 +1,6 @@
 package com.example.wowebackand.respostory;
 
-import android.app.Application;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.wowebackand.Retrofit.ClientNet;
 import com.example.wowebackand.Retrofit.DoNet;
@@ -17,7 +15,6 @@ import androidx.lifecycle.MutableLiveData;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class ClientRespostory
 {
@@ -127,6 +124,11 @@ public class ClientRespostory
             case 2:
                 call=net.updateClient(filter);
                 break;
+
+            case 3:
+                call=net.getPasswordrecover(filter);
+                break;
+
             default:
                 return false;
         }

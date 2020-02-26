@@ -124,7 +124,7 @@ public class AdapterService extends RecyclerView.Adapter<AdapterService.MyViewHo
         services.add(service);
         service=new Service(7,"kubaza",R.drawable.umubaji,null);
         services.add(service);
-        service=new Service(8,"gutwara",R.drawable.shoferi,null);
+        service=new Service(8,"camera",R.drawable.camera,null);
         services.add(service);
 
 

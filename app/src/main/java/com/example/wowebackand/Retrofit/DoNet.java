@@ -52,7 +52,7 @@ public class DoNet<T> implements Callback<T> {
 
             switch (response.code()){
                 case 404:
-                    makeToast("not found");
+                    makeToast("server down");
                     return;
                 case 401:
                     makeToast("please login again");

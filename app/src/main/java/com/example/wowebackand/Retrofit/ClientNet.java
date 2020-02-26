@@ -38,5 +38,8 @@ public interface ClientNet
     @POST("/clients/password")
     Call<Integer> updatePassword(@Body ClientFilter filter);
 
+    @POST("/public/twese/send")
+    Call<Integer> getPasswordrecover(@Body ClientFilter filter);
+
 
 }

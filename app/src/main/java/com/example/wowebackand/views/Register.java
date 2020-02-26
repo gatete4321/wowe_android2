@@ -74,6 +74,9 @@ public class Register extends Fragment {
                makeToast("password not match");
                 return;
             }
+
+
+
             password=password1.getText().toString();
 
             username=userName.getText().toString();
